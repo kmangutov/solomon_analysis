@@ -28,6 +28,10 @@ def loadJSONs(fileNames):
         json = loadJSON(fileName)
         for val in json:
             val["file"] = fileName
+            val["history"] = "nohistory" not in fileName
+            val["modality"] = "text" if ("text" in fileName) else "2d"
+
+
 
         ret += json
     return ret
