@@ -20,6 +20,16 @@ def loadJSON(fileName):
     #pprint(fixed)
     
     data = json.loads(fixed)
-    return data
+    return data['val']
+
+def loadJSONs(fileNames):
+    ret = []
+    for fileName in fileNames:
+        json = loadJSON(fileName)
+        for val in json:
+            val["file"] = fileName
+
+        ret += json
+    return ret
 
 loadJSON = Memoize(loadJSON)
