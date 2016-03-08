@@ -1,6 +1,8 @@
 import json
 from pprint import pprint
 import os
+from memoize import Memoize
+
 
 def loadJSON(fileName):
 
@@ -8,7 +10,7 @@ def loadJSON(fileName):
     return "{\"val\": [" + s[:-3] + "]}"
 
 
-  with open('data1/' + fileName) as f:
+  with open('../data1/' + fileName) as f:
     print f
     fixed = jsonToStrict(f.read())
     
@@ -20,10 +22,4 @@ def loadJSON(fileName):
     data = json.loads(fixed)
     return data
 
-
-
-fileName = "prod-v6-history-2d-b.json"
-
-
-
-pprint(loadJSON(fileName))
+loadJSON = Memoize(loadJSON)
