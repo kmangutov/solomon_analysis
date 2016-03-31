@@ -4,7 +4,8 @@ import json
 from pprint import pprint
 import os
 import conditions
-
+import sys
+from pprint import pprint
 
 
 def printElapsedStats(array, title=""):
@@ -57,6 +58,7 @@ def labels(session):
   combs = [
     [history, modality, design],
     [history, modality],
+    #[modality, design],
     [history],
     [modality],
     [design]
@@ -73,27 +75,80 @@ def nonEmpty(session):
   nonEmptyText = session['modality'] == 'text' and len(session['myVals']['val']) > 0
   return nonEmptyAnnot or nonEmptyText
 
+
+def mapInc(hashmap, key):
+  if not key in hashmap:
+    hashmap[key] = 1
+  else:
+    hashmap[key] = hashmap[key] + 1
+
+def mapIncKeys(hashmap, keys):
+  for key in keys:
+    mapInc(hashmap, key)
+
+
+
+
+
+
 ###ELAPSED TIME
 conditionsElapsed = {}
+goodElapsed = {}
+badElapsed = {}
+goodCount = {}
+badCount = {}
+
 data = loadJSONs(conditions.ALL)
 
 for session in data:
+
+  #if float(session['elapsedTime']) == 25.55 or float(session['elapsedTime']) == 29.01:
+  #  print(session)
+  #  print("---labels: ")
+  #  pprint(labels(session))
+
+  keys = labels(session)
   if nonEmpty(session):
-    keys = labels(session)
     mapArrayAppendKeys(conditionsElapsed, keys, session['elapsedTime'])
+    mapArrayAppendKeys(goodElapsed, keys, session['elapsedTime'])
+
+    mapIncKeys(goodCount, keys)
+
+  else:
+    mapArrayAppendKeys(badElapsed, keys, session['elapsedTime'])
+    mapInc(badCount, label(session))
+    
+    mapIncKeys(badCount, keys)
+
+
 
 pprint("---Feedback Elapsed Time")
 for k,v in conditionsElapsed.iteritems():
   printElapsedStats(v, k)
 
+pprint("---Good Elapsed Time")
+for k,v in goodElapsed.iteritems():
+  printElapsedStats(v, k)
+
+pprint("---Bad Elapsed Time")
+for k,v in badElapsed.iteritems():
+  printElapsedStats(v, k)
+
+pprint("---Good Count")
+pprint(goodCount)
+
+pprint("---Bad Count")
+pprint(badCount)
+
+sys.exit()
 
 ###CHAR LENGTH
 conditionsCharLength = {}
-conditions2dFeedbacks = []
+conditions2dFeedbacks = {}
 data = loadJSONs(conditions.ALL)
 
 for session in data:
-  key = label(session)
+  keys = labels(session)
  
   ###2d MODALITY
   if session['modality'] == '2d' and len(session['myVals']) > 0:
@@ -105,8 +160,8 @@ for session in data:
       charSum += len(feedback['text'])
       feedbackCount += 1
 
-    mapArrayAppend(conditionsCharLength, key, charSum)
-    conditions2dFeedbacks.append(feedbackCount)
+    mapArrayAppendKeys(conditionsCharLength, keys, charSum)
+    mapArrayAppendKeys(conditions2dFeedbacks, keys, feedbackCount)
 
   ###TEXT MODALITY
   
@@ -114,14 +169,62 @@ for session in data:
   elif session['modality'] == 'text' and len(session['myVals']['val']) > 0: 
 
     chars = len(session['myVals']['val'])
-    mapArrayAppend(conditionsCharLength, key, chars)
+    mapArrayAppendKeys(conditionsCharLength, keys, chars)
 
 
 pprint("---Conditions Char Length")
 for k,v in conditionsCharLength.iteritems():
   printElapsedStats(v, k)
 
+pprint("---2d Condition Num Feedbacks")
+for k,v in conditions2dFeedbacks.iteritems():
+  printElapsedStats(v, k)
 
-printElapsedStats(conditions2dFeedbacks, "2d Condition # Feedbacks Left")
+
+#######################
+##TIME LOOKING AT FEEDBACK
+feedbacks = {}
+
+for session in data:
+  keys = labels(session)
+
+  if nonEmpty(session):
+
+    if session['modality'] == 'text':
+
+      feedbacksOpened = 0
+      for history in session['stack']:
+        if float(history['duration']) > 0:
+          feedbacksOpened += 1
+
+      mapArrayAppendKeys(feedbacks, keys, feedbacksOpened)
+
+    else:
+
+      feedbacksOpened = []
+      for history in  session['stack']:
+        if history['action'] == 'hover':
+
+          historyId = history['feedback']['id']
+          if not historyId in feedbacksOpened:
+
+            #novel hover feedback
+            threshold = 1 #seconds
+
+            if float(history['duration']) > threshold:
+              feedbacksOpened.append(historyId)
+
+      mapArrayAppendKeys(feedbacks, keys, len(feedbacksOpened))
+
+
+
+pprint("---Feedbacks opened")
+for k,v in feedbacks.iteritems():
+  printElapsedStats(v, k)
+
+
+
+
+
 
 

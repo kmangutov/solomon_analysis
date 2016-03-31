@@ -1,0 +1,13 @@
+mongoexport -h ds015878.mlab.com:15878 -d solomon-real3 -u kmangutov -p kmangutov -o prod-v6-history-2d-a.json -c prod-v6-history-2d-a
+mongoexport -h ds015878.mlab.com:15878 -d solomon-real3 -u kmangutov -p kmangutov -o prod-v6-history-2d-b.json -c prod-v6-history-2d-b
+mongoexport -h ds015878.mlab.com:15878 -d solomon-real3 -u kmangutov -p kmangutov -o prod-v6-history-2d-c.json -c prod-v6-history-2d-c
+mongoexport -h ds015878.mlab.com:15878 -d solomon-real3 -u kmangutov -p kmangutov -o prod-v6-nohistory-2d-a.json -c prod-v6-nohistory-2d-a
+mongoexport -h ds015878.mlab.com:15878 -d solomon-real3 -u kmangutov -p kmangutov -o prod-v6-nohistory-2d-b.json -c prod-v6-nohistory-2d-b
+mongoexport -h ds015878.mlab.com:15878 -d solomon-real3 -u kmangutov -p kmangutov -o prod-v6-nohistory-2d-c.json -c prod-v6-nohistory-2d-c
+mongoexport -h ds015878.mlab.com:15878 -d solomon-real3 -u kmangutov -p kmangutov -o prod-v6-history-text-a.json -c prod-v6-history-text-a
+mongoexport -h ds015878.mlab.com:15878 -d solomon-real3 -u kmangutov -p kmangutov -o prod-v6-history-text-b.json -c prod-v6-history-text-b
+mongoexport -h ds015878.mlab.com:15878 -d solomon-real3 -u kmangutov -p kmangutov -o prod-v6-history-text-c.json -c prod-v6-history-text-c
+mongoexport -h ds015878.mlab.com:15878 -d solomon-real3 -u kmangutov -p kmangutov -o prod-v6-nohistory-text-a.json -c prod-v6-nohistory-text-a
+mongoexport -h ds015878.mlab.com:15878 -d solomon-real3 -u kmangutov -p kmangutov -o prod-v6-nohistory-text-b.json -c prod-v6-nohistory-text-b
+mongoexport -h ds015878.mlab.com:15878 -d solomon-real3 -u kmangutov -p kmangutov -o prod-v6-nohistory-text-c.json -c prod-v6-nohistory-text-c
+
