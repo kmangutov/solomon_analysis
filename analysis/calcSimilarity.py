@@ -1,10 +1,13 @@
+# -*- coding: utf-8 -*-
 
+from pattern.vector import Document, Vector, distance, normalize
 from dataInterface import loadJSON, loadJSONs
 import json
 from pprint import pprint
 import os
 import conditions
-from specificity import average_specificity2
+import sys
+from pprint import pprint
 from formatting.csvUtil import CSVFile
 
 
@@ -59,6 +62,7 @@ def labels(session):
   combs = [
     [history, modality, design],
     [history, modality],
+    #[modality, design],
     [history],
     [modality],
     [design]
@@ -74,6 +78,17 @@ def nonEmpty(session):
   nonEmptyAnnot = session['modality'] == '2d' and len(session['myVals']) > 0
   nonEmptyText = session['modality'] == 'text' and len(session['myVals']['val']) > 0
   return nonEmptyAnnot or nonEmptyText
+
+
+def mapInc(hashmap, key):
+  if not key in hashmap:
+    hashmap[key] = 1
+  else:
+    hashmap[key] = hashmap[key] + 1
+
+def mapIncKeys(hashmap, keys):
+  for key in keys:
+    mapInc(hashmap, key)
 
 def exportConditions(stat, hashmap, keys):
   print "#################################################"
@@ -104,48 +119,16 @@ def exportConditions(stat, hashmap, keys):
 
   csvFile.close()
 
+def similarity(a, b):
 
+  docA = Document(a)
+  docB = Document(b)
 
+  vecA = normalize(docA.vector)
+  vecB = normalize(docB.vector)
 
+  #print docA.vector
+  return 1 - distance(vecA, vecB)
 
-
-
-###SPECIFICITY
-specificities = {}
-data = loadJSONs(conditions.ALL)
-
-for session in data:
-  keys = labels(session)
- 
-  ###2d MODALITY
-  if session['modality'] == '2d' and len(session['myVals']) > 0:
-
-    corpus = ""
-
-    for feedback in session['myVals']:
-      corpus += feedback['text'] + " "
-
-    specificity = average_specificity2(corpus)
-    mapArrayAppendKeys(specificities, keys, specificity)
-
-  ###TEXT MODALITY
-  
-  #elif len(session['myVals']['val']) > 0:
-  elif session['modality'] == 'text' and len(session['myVals']['val']) > 0: 
-
-    corpus = session['myVals']['val']
-    specificity = average_specificity2(corpus)
-    mapArrayAppendKeys(specificities, keys, specificity)
-
-
-pprint("---Conditions Specificity")
-for k,v in specificities.iteritems():
-  printElapsedStats(v, k)
-
-
-keys = ['history-2d', 'nohistory-2d', 'history-text', 'nohistory-text']
-exportConditions("specificity.csv", specificities, keys)
-
-keys = ['history', 'nohistory', '2d', 'text']
-exportConditions("overview-specificity.csv", specificities, keys)
-
+for i in range(0, len(feedbacks)):
+  print similarity(feedbacks[i], feedbacks2[i])

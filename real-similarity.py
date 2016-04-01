@@ -20,8 +20,6 @@ feedbacks2 = [
 ]
 
 def similarity(a, b):
-  a = feedbacks[i]
-  b = feedbacks2[i]
 
   docA = Document(a)
   docB = Document(b)
@@ -34,3 +32,9 @@ def similarity(a, b):
 
 for i in range(0, len(feedbacks)):
   print similarity(feedbacks[i], feedbacks2[i])
+
+
+
+print similarity('a little bird', 'a little bird')
+print similarity('a little bird', 'a little bird chirps')
+print similarity('a little bird', 'a big dog barks')
