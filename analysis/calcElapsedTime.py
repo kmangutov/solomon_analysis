@@ -109,8 +109,7 @@ def exportConditions(stat, hashmap, keys):
   for key in keys:
     header += key + ","
     sanitized[key] = outliers(hashmap[key][0:lensMin])
-    pprint(hashmap[key][0:lensMin])
-    pprint(sanitized[key])
+
   header = header[0:-1]
   csvFile.write(header)
 
@@ -119,6 +118,45 @@ def exportConditions(stat, hashmap, keys):
     for key in keys:
       ret += str(sanitized[key][i]) + ","
     csvFile.write(ret[0:-1])
+
+  csvFile.close()
+
+def exportAnova(stat, hashmap, keyA, keyB):
+  print "#################################################"
+  csvFile = CSVFile("anova/" + stat)
+
+  keySets = []
+  for A in keyA:
+    for B in keyB:
+      keySets.append(A + "-" + B)
+          
+  pprint(keySets)
+
+
+  lens = {len(hashmap[key]) for key in keySets}
+  print(lens)
+  lensMin = min(lens)
+
+  def outliers(arr):
+    arr.sort()
+    arrLen = len(arr)
+    cutLen = int(round(arrLen * 0.025))
+    pprint("cutlen: " + str(cutLen))
+    if cutLen == 0:
+      return arr
+    return arr[cutLen:-cutLen]
+
+  sanitized = {}
+  header = ""
+  for key in keySets:
+    sanitized[key] = outliers(hashmap[key][0:lensMin])
+
+  for A in keyA:
+    for B in keyB:
+      key = A + "-" + B
+      for i in range(len(sanitized[key])):
+        ret = A + "," + B + "," + str(sanitized[key][i])
+        csvFile.write(ret)
 
   csvFile.close()
 
@@ -156,6 +194,7 @@ for session in data:
 
 keys = ['history-2d', 'nohistory-2d', 'history-text', 'nohistory-text']
 exportConditions("elapsed-time.csv", goodElapsed, keys)
+exportAnova("elapsed-time.csv", goodElapsed, ['nohistory', 'history'], ['text','2d'])
 
 keys = ['history', 'nohistory', '2d', 'text']
 exportConditions("overview-elapsed-time.csv", goodElapsed, keys)
@@ -220,6 +259,8 @@ for k,v in conditions2dFeedbacks.iteritems():
 
 keys = ['history-2d', 'nohistory-2d', 'history-text', 'nohistory-text']
 exportConditions("char-length.csv", conditionsCharLength, keys)
+exportAnova("char-length.csv", conditionsCharLength, ['nohistory', 'history'], ['text','2d'])
+
 
 keys = ['history', 'nohistory', '2d', 'text']
 exportConditions("overview-char-length.csv", conditionsCharLength, keys)
@@ -272,6 +313,8 @@ for k,v in feedbacks.iteritems():
 
 keys = ['history-2d', 'history-text']
 exportConditions("feedbacks-looked.csv", feedbacks, keys)
+exportAnova("feedbacks-looked.csv", feedbacks, ['nohistory', 'history'], ['text','2d'])
+
 
 keys = ['history-2d-a', 'history-2d-b', 'history-2d-c']
 exportConditions("design-feedbacks-looked.csv", feedbacks, keys)

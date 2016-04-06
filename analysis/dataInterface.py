@@ -7,12 +7,12 @@ from memoize import Memoize
 def loadJSON(fileName):
 
   def jsonToStrict(s):
-    return "{\"val\": [" + s[:-3] + "]}"
+    return "{\"val\": [" + s[:-1].replace("\n", ",") + "]}"
 
 
-  with open('../data1/' + fileName) as f:
-    print f
+  with open('../data2/' + fileName) as f:
     fixed = jsonToStrict(f.read())
+
     
     #fOut = open('write.json', 'w')
     #fOut.write(fixed)
@@ -37,3 +37,6 @@ def loadJSONs(fileNames):
     return ret
 
 loadJSON = Memoize(loadJSON)
+
+if __name__ == "__main__":
+    loadJSON("fake.json")

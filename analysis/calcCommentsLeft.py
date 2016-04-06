@@ -89,7 +89,7 @@ def mapIncKeys(hashmap, keys):
 
 def exportConditions(stat, hashmap, keys):
   print "#################################################"
-  csvFile = CSVFile(stat)
+  csvFile = CSVFile("d3/" + stat)
 
   lens = {len(hashmap[key]) for key in keys}
   print(lens)
@@ -109,8 +109,7 @@ def exportConditions(stat, hashmap, keys):
   for key in keys:
     header += key + ","
     sanitized[key] = outliers(hashmap[key][0:lensMin])
-    pprint(hashmap[key][0:lensMin])
-    pprint(sanitized[key])
+
   header = header[0:-1]
   csvFile.write(header)
 
@@ -122,47 +121,73 @@ def exportConditions(stat, hashmap, keys):
 
   csvFile.close()
 
+def exportAnova(stat, hashmap, keyA, keyB):
+  print "#################################################"
+  csvFile = CSVFile("anova/" + stat)
 
+  keySets = []
+  for A in keyA:
+    for B in keyB:
+      keySets.append(A + "-" + B)
+          
+  pprint(keySets)
+
+
+  lens = {len(hashmap[key]) for key in keySets}
+  print(lens)
+  lensMin = min(lens)
+
+  def outliers(arr):
+    arr.sort()
+    arrLen = len(arr)
+    cutLen = int(round(arrLen * 0.025))
+    pprint("cutlen: " + str(cutLen))
+    if cutLen == 0:
+      return arr
+    return arr[cutLen:-cutLen]
+
+  sanitized = {}
+  header = ""
+  for key in keySets:
+    sanitized[key] = outliers(hashmap[key][0:lensMin])
+
+  for A in keyA:
+    for B in keyB:
+      key = A + "-" + B
+      for i in range(len(sanitized[key])):
+        ret = A + "," + B + "," + str(sanitized[key][i])
+        csvFile.write(ret)
+
+  csvFile.close()
 
 
 
 #######################
 ##Comments left behind
 feedbacks = {}
+data = loadJSONs(conditions.ALL)
 
 for session in data:
   keys = labels(session)
 
-  if nonEmpty(session):
+  #if nonEmpty(session):
 
-    if session['modality'] != 'text':
+  if session['modality'] != 'text':
 
-      feedbacksOpened = []
-      for history in  session['stack']:
-        if history['action'] == 'hover':
-
-          historyId = history['feedback']['id']
-          if not historyId in feedbacksOpened:
-
-            #novel hover feedback
-            threshold = 1 #seconds
-
-            if float(history['duration']) > threshold:
-              feedbacksOpened.append(historyId)
-
-      mapArrayAppendKeys(feedbacks, keys, len(feedbacksOpened))
+    pprint(session['myVals'])
+    feedbacksLeft = len(session['myVals'])
+    mapArrayAppendKeys(feedbacks, keys, feedbacksLeft)
 
 
 
-pprint("---Feedbacks opened")
+pprint("---Feedbacks left")
 for k,v in feedbacks.iteritems():
   printElapsedStats(v, k)
 
-keys = ['history-2d', 'history-text']
-exportConditions("feedbacks-looked.csv", feedbacks, keys)
+keys = ['history-2d', 'nohistory-2d']
+exportConditions("feedbacks-left.csv", feedbacks, keys)
 
-keys = ['history-2d-a', 'history-2d-b', 'history-2d-c']
-exportConditions("design-feedbacks-looked.csv", feedbacks, keys)
+exportAnova("feedbacks-left.csv", feedbacks, ['history','nohistory'], ['2d'])
 
 #pprint(feedbacks)
 

@@ -45,7 +45,7 @@ for session in data:
 
   if len(session['myVals']) == 0:
     mapInc(countEmpty, fileName)
-    pprint(session['code'] + 
+    pprint(str(session['code']) + 
       " is a empty session from " + fileName)
   else:
     mapInc(count, fileName)
@@ -72,7 +72,7 @@ for session in data:
 
   if len(session['myVals']['val']) == 0:
     mapInc(countEmpty, fileName)
-    pprint(session['code'] + 
+    pprint(str(session['code']) + 
       " is a empty session from " + session['file'])
   else:
     mapInc(count, fileName)

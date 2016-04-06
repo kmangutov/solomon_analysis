@@ -3,6 +3,7 @@
 
 from pattern.en import mood, wordlist, wordnet, Sentence, parse, VERB, NOUN, ADJECTIVE, ADVERB, tag
 from pattern.vector import stem, PORTER, LEMMA, count, words, Document
+from pprint import pprint
 
 def wordnet_depth_simple(word):
 
@@ -43,16 +44,28 @@ def wordnet_depth(word):
   if pos_object == None:
     return -1
 
-
+  #print "word: " + str(string)
   synsets = wordnet.synsets(string, pos_object)
+  #print synsets
 
   if len(synsets) < 1:
     #print 'No SYNSETS: ' , string
     return -1
 
   synset = synsets[0]
+  #pprint(synsets)
+  #pprint(vars(synset))
+  #return synset.max_depth()
+
   #synset = wordnet.synsets(word)[0]
-  hypernyms = synset.hypernyms(True)
+
+  #pprint(synset)
+
+  try:
+    hypernyms = synset.hypernyms(True)
+  except RuntimeError as re:
+    return -1
+
   depth = len(hypernyms)
   #print 'Considered: ' , string, ', depth: ' , depth
   #print 'Hypernyms: ' , hypernyms

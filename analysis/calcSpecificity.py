@@ -77,7 +77,7 @@ def nonEmpty(session):
 
 def exportConditions(stat, hashmap, keys):
   print "#################################################"
-  csvFile = CSVFile(stat)
+  csvFile = CSVFile("d3/" + stat)
 
   lens = {len(hashmap[key]) for key in keys}
   lensMin = min(lens)
@@ -105,6 +105,44 @@ def exportConditions(stat, hashmap, keys):
   csvFile.close()
 
 
+def exportAnova(stat, hashmap, keyA, keyB):
+  print "#################################################"
+  csvFile = CSVFile("anova/" + stat)
+
+  keySets = []
+  for A in keyA:
+    for B in keyB:
+      keySets.append(A + "-" + B)
+          
+  pprint(keySets)
+
+
+  lens = {len(hashmap[key]) for key in keySets}
+  print(lens)
+  lensMin = min(lens)
+
+  def outliers(arr):
+    arr.sort()
+    arrLen = len(arr)
+    cutLen = int(round(arrLen * 0.025))
+    pprint("cutlen: " + str(cutLen))
+    if cutLen == 0:
+      return arr
+    return arr[cutLen:-cutLen]
+
+  sanitized = {}
+  header = ""
+  for key in keySets:
+    sanitized[key] = outliers(hashmap[key][0:lensMin])
+
+  for A in keyA:
+    for B in keyB:
+      key = A + "-" + B
+      for i in range(len(sanitized[key])):
+        ret = A + "," + B + "," + str(sanitized[key][i])
+        csvFile.write(ret)
+
+  csvFile.close()
 
 
 
@@ -134,6 +172,9 @@ for session in data:
   elif session['modality'] == 'text' and len(session['myVals']['val']) > 0: 
 
     corpus = session['myVals']['val']
+    print corpus
+    #system.exit()
+
     specificity = average_specificity2(corpus)
     mapArrayAppendKeys(specificities, keys, specificity)
 
@@ -145,6 +186,7 @@ for k,v in specificities.iteritems():
 
 keys = ['history-2d', 'nohistory-2d', 'history-text', 'nohistory-text']
 exportConditions("specificity.csv", specificities, keys)
+exportAnova("text-specificity.csv", specificities,  ['nohistory', 'history'], ['text','2d'])
 
 keys = ['history', 'nohistory', '2d', 'text']
 exportConditions("overview-specificity.csv", specificities, keys)
