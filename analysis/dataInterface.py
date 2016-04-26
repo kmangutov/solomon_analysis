@@ -10,7 +10,7 @@ def loadJSON(fileName):
     return "{\"val\": [" + s[:-1].replace("\n", ",") + "]}"
 
 
-  with open('../data2/' + fileName) as f:
+  with open('../data3/' + fileName) as f:
     fixed = jsonToStrict(f.read())
 
     

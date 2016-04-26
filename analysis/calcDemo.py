@@ -10,6 +10,16 @@ from formatting.csvUtil import CSVFile
 
 
 def printElapsedStats(array, title=""):
+
+  def outliers(arr):
+    arr.sort()
+    arrLen = len(arr)
+    cutLen = int(round(arrLen * 0.025))
+    #pprint("cutlen: " + str(cutLen))
+    if cutLen == 0:
+      return arr
+    return arr[cutLen:-cutLen]
+
   sumElapsed = 0.0
   for value in array:
     sumElapsed += float(value)
@@ -17,7 +27,7 @@ def printElapsedStats(array, title=""):
   meanElapsedTime = sumElapsed / len(array)
 
   sumElapsedDev = 0
-  for value in array:
+  for value in outliers(array):
     sumElapsedDev += (float(value) - meanElapsedTime)**2
 
   variance = sumElapsedDev / len(array)
@@ -161,42 +171,49 @@ def exportAnova(stat, hashmap, keyA, keyB):
   csvFile.close()
 
 
+#############
 
-#######################
-##Comments left behind
-feedbacks = {}
+
 data = loadJSONs(conditions.ALL)
+demos = loadJSON(conditions.DEMO)
+
+effort = {}
+usefulness = {}
+
+def lookupDemo(code):
+  for demo in demos:
+    if int(demo['code']) == int(code):
+      return demo
+  return None
+
+#for session in data:
+#  print session['code']
 
 for session in data:
-  keys = labels(session)
+  demo = lookupDemo(session['code'])
 
-  #if nonEmpty(session):
+  if not demo == None:
+    keys = labels(session)
+    mapArrayAppendKeys(effort, keys, demo['effort'])
+    mapArrayAppendKeys(usefulness, keys, demo['usefulness'])
 
-  if session['modality'] != 'text':
+print '############### EFFORT'
 
-    pprint(session['myVals'])
-    feedbacksLeft = len(session['myVals'])
-    mapArrayAppendKeys(feedbacks, keys, feedbacksLeft)
-
-
-
-pprint("---Feedbacks left")
-for k,v in feedbacks.iteritems():
+for k,v in effort.iteritems():
   printElapsedStats(v, k)
 
-keys = ['history-2d', 'nohistory-2d']
-exportConditions("feedbacks-left.csv", feedbacks, keys)
+print '############### USEFULNESS'
 
-exportAnova("feedbacks-left.csv", feedbacks, ['history','nohistory'], ['2d', 'text'])
+for k,v in usefulness.iteritems():
+  printElapsedStats(v, k)
 
-#pprint(feedbacks)
+keys = ['history-2d', 'nohistory-2d', 'history-text', 'nohistory-text']
 
+exportConditions("demo-effort.csv", effort, keys)
+exportAnova("demo-effort.csv", effort, ['nohistory', 'history'], ['text','2d'])
 
-
-#######################
-###
-
-
+exportConditions("demo-usefulness.csv", usefulness, keys)
+exportAnova("demo-usefulness.csv", usefulness, ['nohistory', 'history'], ['text','2d'])
 
 
 

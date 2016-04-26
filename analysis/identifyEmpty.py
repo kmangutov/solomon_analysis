@@ -24,7 +24,7 @@ def encounterCode(code):
     codesEncountered.append(code)
     return
   else:
-    pprint("What, encounter " + code + " twice")
+    pprint("What, encounter " + str(code) + " twice")
 
 
 

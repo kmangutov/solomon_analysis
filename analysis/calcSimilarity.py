@@ -90,17 +90,22 @@ def mapIncKeys(hashmap, keys):
   for key in keys:
     mapInc(hashmap, key)
 
+
 def exportConditions(stat, hashmap, keys):
   print "#################################################"
   csvFile = CSVFile(stat)
 
   lens = {len(hashmap[key]) for key in keys}
+  print(lens)
   lensMin = min(lens)
 
   def outliers(arr):
     arr.sort()
     arrLen = len(arr)
     cutLen = int(round(arrLen * 0.025))
+    pprint("cutlen: " + str(cutLen))
+    if cutLen == 0:
+      return arr
     return arr[cutLen:-cutLen]
 
   sanitized = {}
@@ -108,6 +113,7 @@ def exportConditions(stat, hashmap, keys):
   for key in keys:
     header += key + ","
     sanitized[key] = outliers(hashmap[key][0:lensMin])
+
   header = header[0:-1]
   csvFile.write(header)
 
@@ -116,6 +122,83 @@ def exportConditions(stat, hashmap, keys):
     for key in keys:
       ret += str(sanitized[key][i]) + ","
     csvFile.write(ret[0:-1])
+
+  csvFile.close()
+
+def exportAnova(stat, hashmap, keyA, keyB):
+  print "#################################################"
+  csvFile = CSVFile("anova/" + stat)
+
+  keySets = []
+  for A in keyA:
+    for B in keyB:
+      keySets.append(A + "-" + B)
+          
+  pprint(keySets)
+
+
+  lens = {len(hashmap[key]) for key in keySets}
+  print(lens)
+  lensMin = min(lens)
+
+  def outliers(arr):
+    arr.sort()
+    arrLen = len(arr)
+    cutLen = int(round(arrLen * 0.025))
+    pprint("cutlen: " + str(cutLen))
+    if cutLen == 0:
+      return arr
+    return arr[cutLen:-cutLen]
+
+  sanitized = {}
+  header = ""
+  for key in keySets:
+    sanitized[key] = outliers(hashmap[key][0:lensMin])
+
+  for A in keyA:
+    for B in keyB:
+      key = A + "-" + B
+      for i in range(len(sanitized[key])):
+        ret = A + "," + B + "," + str(sanitized[key][i])
+        csvFile.write(ret)
+
+  csvFile.close()
+
+def exportOneWayAnova(stat, hashmap, keyA, doOutliers=True):
+  print "#################################################"
+  csvFile = CSVFile("anova/" + stat)
+
+  pprint(keyA)
+
+  lens = {len(hashmap[key]) for key in keyA}
+  pprint(lens)
+  lensMin = min(lens)
+
+  def outliers(arr):
+    arr.sort()
+    arrLen = len(arr)
+    cutLen = int(round(arrLen * 0.025))
+    pprint("cutlen: " + str(cutLen))
+    if cutLen == 0:
+      return arr
+    return arr[cutLen:-cutLen]
+
+
+  sanitized = {}
+  header = ""
+  for key in keyA:
+    if doOutliers:
+      sanitized[key] = outliers(hashmap[key][0:lensMin])
+    else:
+      sanitized[key] = hashmap[key][0:lensMin]
+
+  pprint(sanitized)
+
+  for A in keyA:
+    print "EXPORTONEWAY KEY " + A
+    for i in range(len(sanitized[A])):
+      ret = A + "," + str(sanitized[A][i])
+      csvFile.write(ret)
 
   csvFile.close()
 
@@ -130,5 +213,197 @@ def similarity(a, b):
   #print docA.vector
   return 1 - distance(vecA, vecB)
 
-for i in range(0, len(feedbacks)):
-  print similarity(feedbacks[i], feedbacks2[i])
+
+
+
+ ###############
+ 
+data = loadJSONs(conditions.ALL)
+mapSimilarity = {}
+simMax = 0
+simMin = 1
+
+
+def avgSimilarity(feedback, feedbacks):
+
+  ret = 0.0
+  count = len(feedbacks)
+  for item in feedbacks:
+    ret += similarity(feedback['text'], item['text'])
+
+  if count == 0:
+    return 0
+
+  return ret / count
+
+
+for session in data:
+  keys = labels(session)
+
+  if nonEmpty(session):
+    if session['modality'] == 'text':
+      
+      #pass
+      pprint(session)
+      sys.exit(0)
+
+    else:
+      feedbacksOpenedId = []
+      feedbacksOpenedVal = []
+
+      feedbacksUnopenedId = []
+      feedbacksUnopenedVal = []
+
+      ### create feedbacksOpened corpus
+      for history in session['stack']:
+
+        #pprint(session);
+        #sys.exit(0)
+
+        ### if it's a hover, add it to feedbacksOpenedVal ("corpus")
+        if history['action'] == 'hover':
+
+          historyId = history['feedback']['id']
+          if not historyId in feedbacksOpenedId:
+
+            #novel hover feedback
+            threshold = 1 #seconds
+
+            if float(history['duration']) > threshold:
+              feedbacksOpenedId.append(historyId)
+              feedbacksOpenedVal.append(history['feedback']);
+
+        ### if it's a write, calculate avg similarity to seen
+        if history['action'] == 'write':
+
+          historyId = history['feedback']['id']
+          if not historyId in feedbacksOpenedId: #make sure we're not hovering one i made
+
+            if len(feedbacksOpenedVal) == 0:
+              continue
+
+            sim = avgSimilarity(history['feedback'], feedbacksOpenedVal)
+
+            ### calculate average similarity of all 'vals' not in feedbacksOpenedId
+            unseenCorpus = []
+            for oldVal in session['vals']:
+              if oldVal['id'] not in feedbacksOpenedId: 
+                ### this feedback was not opened
+                unseenCorpus.append(oldVal)
+
+            unseenSim = avgSimilarity(history['feedback'], unseenCorpus)
+
+
+
+
+            #if sim == 0:
+              #pprint("###SIM IS 0:")
+              #pprint(history['feedback'])
+              #pprint("OPENED:")
+              #pprint(feedbacksOpenedVal)
+              #pprint("###")
+
+            if unseenSim == 0 or sim == 0:
+              continue
+
+            print 'FOR COMMENT ' + history['feedback']['text']
+            print '### OPENED'
+            pprint(feedbacksOpenedVal)
+            print '### UNOPENED'
+            pprint(unseenCorpus)
+
+            print 'PRIMED SIM: ' + str(sim)
+            print 'UNPRIMED SIM: ' + str(unseenSim)
+
+            if sim > simMax:
+              simMax = sim
+
+            if sim < simMin:
+              simMin = sim
+
+            if unseenSim > simMax:
+              simMax = unseenSim
+
+            if unseenSim < simMin:
+              simMin = unseenSim
+
+            mapArrayAppendKeys(mapSimilarity, ['primed'], sim);
+            mapArrayAppendKeys(mapSimilarity, ['unprimed'], unseenSim)
+
+      ### create unopened corpus
+      #for feedback in session['vals']:
+
+        ### if it's not in OpenedId, put it in UnopenedId
+        #feedbackId = feedback['id']
+        #if not feedbackId in feedbacksOpenedVal:
+        #  feedbacksUnopenedId.append(feedbackId)
+        #  feedbacksUnopenedVal.append(feedback)
+
+      ### calc similarity to unopened coprus
+      #for feedback in session['myVals']:
+
+        #if len(feedbacksUnopenedVal) == 0:
+        #  continue
+
+        #sim = avgSimilarity(feedback, feedbacksUnopenedVal)
+        #mapArrayAppendKeys(mapSimilarity, ['unprimed'], sim)
+
+      #pprint(feedbacksOpenedVal)
+      #pprint(feedbacksUnopenedVal)
+
+pprint(mapSimilarity)
+
+def outliers(arr):
+  arr.sort()
+  arrLen = len(arr)
+  cutLen = int(round(arrLen * 0.025))
+  pprint("cutlen: " + str(cutLen))
+  if cutLen == 0:
+    return arr
+  return arr[cutLen:-cutLen]
+
+def normalize(arr, vMin, vMax):
+  ret = []
+  for item in arr:
+    ret.append((item - vMin) / (vMax - vMin))
+  return ret
+
+
+
+###CUT LENGHT TO SAME FOR ALL CONDITIONS
+
+###TAKE OUT OUTLIERS
+
+###NORMALIZE
+
+
+
+
+#### take out outliers
+mapSimilarity['primed'] = outliers(mapSimilarity['primed'])
+mapSimilarity['unprimed'] = outliers(mapSimilarity['unprimed'])
+
+### NORMALIZE
+simMax = max(mapSimilarity['primed'])
+simMin = min(mapSimilarity['unprimed'])
+pprint("---Normalized")
+ss = {'primed': normalize(mapSimilarity['primed'], simMin, simMax),
+'unprimed': normalize(mapSimilarity['unprimed'], simMin, simMax)}
+
+###SS = remove outliers, normalize
+pprint(ss)
+
+
+exportOneWayAnova("2d-similarity.csv", ss, ['primed', 'unprimed'], False)
+
+keys = ['history', 'nohistory', '2d', 'text']
+exportConditions("overview-specificity.csv", specificities, keys)
+
+
+pprint("---Normalized")
+for k,v in ss.iteritems():
+  printElapsedStats(v, k)
+
+pprint("---Similarity")
+for k,v in ss.iteritems():
+  printElapsedStats(v, k)

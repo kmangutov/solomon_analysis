@@ -12,6 +12,8 @@ _nta = "prod-v7-nohistory-text-a.json"
 _ntb = "prod-v7-nohistory-text-b.json"
 _ntc = "prod-v7-nohistory-text-c.json"
 
+DEMO = "prod-v7-demo.json"
+
 HISTORY = [
   _h2a,
   _h2b,
