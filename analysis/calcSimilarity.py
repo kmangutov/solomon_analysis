@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from pattern.vector import Document, Vector, distance, normalize
-from dataInterface import loadJSON, loadJSONs
+from dataInterface import loadJSON, loadJSONs, loadData
 import json
 from pprint import pprint
 import os
@@ -9,6 +9,7 @@ import conditions
 import sys
 from pprint import pprint
 from formatting.csvUtil import CSVFile
+import itertools
 
 
 
@@ -93,34 +94,18 @@ def mapIncKeys(hashmap, keys):
 
 def exportConditions(stat, hashmap, keys):
   print "#################################################"
-  csvFile = CSVFile(stat)
+  csvFile = CSVFile("d3/" + stat)
 
-  lens = {len(hashmap[key]) for key in keys}
-  print(lens)
-  lensMin = min(lens)
-
-  def outliers(arr):
-    arr.sort()
-    arrLen = len(arr)
-    cutLen = int(round(arrLen * 0.025))
-    pprint("cutlen: " + str(cutLen))
-    if cutLen == 0:
-      return arr
-    return arr[cutLen:-cutLen]
-
-  sanitized = {}
   header = ""
   for key in keys:
     header += key + ","
-    sanitized[key] = outliers(hashmap[key][0:lensMin])
-
   header = header[0:-1]
   csvFile.write(header)
 
-  for i in range(len(sanitized[keys[0]])):
+  for i in range(len(hashmap[keys[0]])):
     ret = ""
     for key in keys:
-      ret += str(sanitized[key][i]) + ","
+      ret += str(hashmap[key][i]) + ","
     csvFile.write(ret[0:-1])
 
   csvFile.close()
@@ -129,37 +114,11 @@ def exportAnova(stat, hashmap, keyA, keyB):
   print "#################################################"
   csvFile = CSVFile("anova/" + stat)
 
-  keySets = []
-  for A in keyA:
-    for B in keyB:
-      keySets.append(A + "-" + B)
-          
-  pprint(keySets)
-
-
-  lens = {len(hashmap[key]) for key in keySets}
-  print(lens)
-  lensMin = min(lens)
-
-  def outliers(arr):
-    arr.sort()
-    arrLen = len(arr)
-    cutLen = int(round(arrLen * 0.025))
-    pprint("cutlen: " + str(cutLen))
-    if cutLen == 0:
-      return arr
-    return arr[cutLen:-cutLen]
-
-  sanitized = {}
-  header = ""
-  for key in keySets:
-    sanitized[key] = outliers(hashmap[key][0:lensMin])
-
   for A in keyA:
     for B in keyB:
       key = A + "-" + B
-      for i in range(len(sanitized[key])):
-        ret = A + "," + B + "," + str(sanitized[key][i])
+      for i in range(len(hashmap[key])):
+        ret = A + "," + B + "," + str(hashmap[key][i])
         csvFile.write(ret)
 
   csvFile.close()
@@ -218,18 +177,28 @@ def similarity(a, b):
 
  ###############
  
-data = loadJSONs(conditions.ALL)
+data = loadData()#loadJSONs(conditions.ALL)#loadJSONs(conditions.TEXT)#loadJSONs(conditions.ALL)
 mapSimilarity = {}
 simMax = 0
 simMin = 1
 
 
 def avgSimilarity(feedback, feedbacks):
-
   ret = 0.0
   count = len(feedbacks)
   for item in feedbacks:
     ret += similarity(feedback['text'], item['text'])
+
+  if count == 0:
+    return 0
+
+  return ret / count
+
+def avgTextSimilarity(text, texts):
+  ret = 0.0
+  count = len(texts)
+  for item in texts:
+    ret += similarity(text, item)
 
   if count == 0:
     return 0
@@ -245,7 +214,53 @@ for session in data:
       
       #pass
       pprint(session)
-      sys.exit(0)
+
+      feedbacksOpenedId = []
+      feedbacksOpenedVal = []
+
+      feedbacksUnopenedId = []
+      feedbacksUnopenedVal = []
+
+      myVal = session['myVals']['val']
+
+      ### aggragate corpuses
+      for stackItem in session['stack']:
+        stackId = stackItem['id']
+
+        if not stackId in feedbacksOpenedId and not stackId in feedbacksUnopenedId:
+          if stackItem['duration'] > 1: #1 sec cutoff
+            feedbacksOpenedId.append(stackId)
+            feedbacksOpenedVal.append(stackItem['val'])
+          else:
+            feedbacksUnopenedId.append(stackId)
+            feedbacksUnopenedVal.append(stackItem['val'])
+
+      ### calculate similarity
+      sim = avgTextSimilarity(myVal, feedbacksOpenedVal)
+      unseenSim = avgTextSimilarity(myVal, feedbacksUnopenedVal)
+
+
+      pprint('TEXT MODALITY SIM: ' + str(sim) + ' UNSIM:' + str(unseenSim))
+
+      if unseenSim == 0 or sim == 0:
+        continue
+
+      ### update min max
+      if sim > simMax:
+        simMax = sim
+
+      if sim < simMin:
+        simMin = sim
+
+      if unseenSim > simMax:
+        simMax = unseenSim
+
+      if unseenSim < simMin:
+        simMin = unseenSim
+
+      mapArrayAppendKeys(mapSimilarity, ['primed-text'], sim);
+      mapArrayAppendKeys(mapSimilarity, ['unprimed-text'], unseenSim)
+
 
     else:
       feedbacksOpenedId = []
@@ -327,8 +342,8 @@ for session in data:
             if unseenSim < simMin:
               simMin = unseenSim
 
-            mapArrayAppendKeys(mapSimilarity, ['primed'], sim);
-            mapArrayAppendKeys(mapSimilarity, ['unprimed'], unseenSim)
+            mapArrayAppendKeys(mapSimilarity, ['primed-' + str(session['modality'])], sim);
+            mapArrayAppendKeys(mapSimilarity, ['unprimed-' + str(session['modality'])], unseenSim)
 
       ### create unopened corpus
       #for feedback in session['vals']:
@@ -365,45 +380,49 @@ def outliers(arr):
 def normalize(arr, vMin, vMax):
   ret = []
   for item in arr:
-    ret.append((item - vMin) / (vMax - vMin))
+    ret.append((float(item) - vMin) / (vMax - vMin))
   return ret
 
+def normalizeMap(hashmap):
+  vals = []
+  for v in hashmap.values():
+    vals += v
 
+  pprint(vals)
+
+  vMin = min(vals)
+  vMax = max(vals)
+
+  #print 'Min ' + vMin + ", Max " + vMax
+
+
+  for key in hashmap.keys():
+    hashmap[key] = normalize(hashmap[key], vMin, vMax)
+  return hashmap
+
+lens = {len(mapSimilarity[key]) for key in mapSimilarity.keys()}
+minLen = min(lens)
+ss = mapSimilarity
 
 ###CUT LENGHT TO SAME FOR ALL CONDITIONS
+for key in ss.keys():
+  ss[key] = ss[key][0:minLen]
 
 ###TAKE OUT OUTLIERS
+for key in ss.keys():
+  ss[key] = outliers(ss[key])
 
 ###NORMALIZE
+ss = normalizeMap(ss)
+#for key in ss.keys():
+#  ss[key] = normalize(ss[key], simMin, simMax)
 
 
-
-
-#### take out outliers
-mapSimilarity['primed'] = outliers(mapSimilarity['primed'])
-mapSimilarity['unprimed'] = outliers(mapSimilarity['unprimed'])
-
-### NORMALIZE
-simMax = max(mapSimilarity['primed'])
-simMin = min(mapSimilarity['unprimed'])
-pprint("---Normalized")
-ss = {'primed': normalize(mapSimilarity['primed'], simMin, simMax),
-'unprimed': normalize(mapSimilarity['unprimed'], simMin, simMax)}
-
-###SS = remove outliers, normalize
 pprint(ss)
+exportAnova('similarity.csv', ss, ['primed', 'unprimed'], ['text', '2d']);
 
 
-exportOneWayAnova("2d-similarity.csv", ss, ['primed', 'unprimed'], False)
-
-keys = ['history', 'nohistory', '2d', 'text']
-exportConditions("overview-specificity.csv", specificities, keys)
+keys = ['unprimed-text', 'unprimed-2d', 'primed-text', 'primed-2d']
+exportConditions("similarity.csv", ss, keys)
 
 
-pprint("---Normalized")
-for k,v in ss.iteritems():
-  printElapsedStats(v, k)
-
-pprint("---Similarity")
-for k,v in ss.iteritems():
-  printElapsedStats(v, k)
