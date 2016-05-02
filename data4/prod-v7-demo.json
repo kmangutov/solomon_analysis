@@ -491,3 +491,5 @@
 {"_id":{"$oid":"571ed31ef8c2e7476223c01e"},"time":"1461637881255","code":"1593","age":"25-35","gender":"Male","expertise":"1","effort":"3","usefulness":"4"}
 {"_id":{"$oid":"571ed5780a00b245052ce7d6"},"time":"1461638536310","code":"1595","age":"25-35","gender":"Male","expertise":"3","effort":"1","usefulness":"4"}
 {"_id":{"$oid":"571ede3df8c2e747622445e7"},"time":"1461640741004","code":"1597","age":"45-54","gender":"Female","expertise":"3","effort":"3","usefulness":"3"}
+{"_id":{"$oid":"5722ebc00a00b274676d0cc4"},"time":"1461906339835","code":"1600","age":"25-35","gender":"Male","expertise":"4","effort":"3","usefulness":"5"}
+{"_id":{"$oid":"5722f088f8c2e776a0f9f888"},"time":"1461907565434","code":"1601","age":"45-54","gender":"Female","expertise":"2","effort":"2","usefulness":"3"}

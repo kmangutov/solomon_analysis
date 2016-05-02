@@ -5,8 +5,27 @@ from memoize import Memoize
 import conditions
 
 
+def loadJSON(fileName):
+
+  def jsonToStrict(s):
+    return "{\"val\": [" + s[:-1].replace("\n", ",") + "]}"
+
+
+  with open('../data4/' + fileName) as f:
+    fixed = jsonToStrict(f.read())
+    
+    data = json.loads(fixed)
+    return data['val']
+
 
 def loadData():
+
+    demos = loadJSON(conditions.DEMO)
+    def lookupDemo(code):
+      for demo in demos:
+        if int(demo['code']) == int(code):
+          return demo
+      return None
 
     def mapInc(hashmap, key):
         if not key in hashmap:
@@ -29,7 +48,7 @@ def loadData():
 
     for session in data:
 
-        if not nonEmpty(session):
+        if not nonEmpty(session) or lookupDemo(session['code']) == None:
             continue
 
         sessLabel = label(session)
@@ -53,12 +72,6 @@ def loadJSON(fileName):
 
   with open('../data4/' + fileName) as f:
     fixed = jsonToStrict(f.read())
-
-    
-    #fOut = open('write.json', 'w')
-    #fOut.write(fixed)
-    #fOut.close()
-    #pprint(fixed)
     
     data = json.loads(fixed)
     return data['val']
