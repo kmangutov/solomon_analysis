@@ -3,7 +3,62 @@ from pprint import pprint
 import os
 from memoize import Memoize
 import conditions
+import csv
 
+def lookupDemo(code):
+  demos = loadJSON(conditions.DEMO)
+  for demo in demos:
+    if int(demo['code']) == int(code):
+      return demo
+  return None
+
+def lookupSession(code):
+  data = loadData()
+  for session in data:
+    if int(session['code']) == int(code):
+      return session
+  return None
+
+
+def loadCSV(fileName):
+    out = []
+    with open(fileName, 'rbU') as fileIn:
+        readerIn = csv.reader(fileIn)
+        for row in readerIn:
+            out.append(row)
+    return out
+
+
+    #split by '###' delimeter
+def splitSessions():
+  with open('idea_units/split_sessions.csv', 'rbU') as fileIn:
+    with open('idea_units/idea_units.csv', 'wb') as fileOut:
+
+      writerOut = csv.writer(fileOut)
+      readerIn = csv.reader(fileIn)
+
+      for row in readerIn:
+        id = row[0]
+        units = row[1].split("#")
+
+        if len(units) != 1:
+          pprint(units)
+
+        for unit in units:
+          writerOut.writerow([id, unit])
+
+
+def lJSON(fileName):
+
+  def jsonToStrict(s):
+    return "{\"val\": [" + s[:-1].replace("\n", ",") + "]}"
+
+
+  with open(fileName) as f:
+    fixed = jsonToStrict(f.read())
+    
+    data = json.loads(fixed)
+    return data['val']
 
 def loadJSON(fileName):
 

@@ -1,102 +1,70 @@
+# -*- coding: utf-8 -*-
 
-from dataInterface import loadJSON, loadJSONs
+from pattern.vector import Document, Vector, distance, normalize
+from dataInterface import loadJSON, loadJSONs, loadData
 import json
 from pprint import pprint
 import os
 import conditions
-from formatting.csvUtil import CSVFile
 import sys
-
-
-def mapInc(hashmap, key):
-  if not key in hashmap:
-    hashmap[key] = 1
-  else:
-    hashmap[key] = hashmap[key] + 1
-
-def mapFile(hashmap, fileName):
-  if not fileName in hashmap:
-    hashmap[fileName] = CSVFile(fileName, '')
-  else:
-    pass
-  return hashmap[fileName]
-
-
-codesEncountered = []
-def encounterCode(code):
-  if code not in codesEncountered:
-    codesEncountered.append(code)
-    return
-  else:
-    pprint("What, encounter " + str(code) + " twice")
+from pprint import pprint
+from formatting.csvUtil import CSVFile
+import itertools
+from feedbackProcessing import *
+import csv
 
 
 
-  #csvFile = CSVFile(name, subdir)
-  #csvFile.write(header)
-  #csvFile.write(ret[0:-1])
-  #csvFile.close()
+def loadSessions():
+  file = csv.writer(open('idea_units/presplit_sessions.csv', 'wb'))#("sessions.csv", "idea_units/")
+  file.writerow(["session", "corpus"])
+
+
+  data = sorted(loadData(), key= lambda sess: int(sess['code']))
+  count = 0
+
+  for session in data:
+    keys = labels(session)
+
+
+    ###2d MODALITY
+    if session['modality'] == '2d':
+      for feedback in session['myVals']:
+        
+        count += 1
+        corpus = feedback['text']
+        file.writerow([str(session['code']), corpus])
+
+
+    else: 
+
+      count += 1
+      corpus = session['myVals']['val']
+      file.writerow([str(session['code']), corpus])
+
+
+  #file.close()
+  print "Count: " + str(count)
+
+#split by '###' delimeter
+def splitSessions():
+  with open('idea_units/split_sessions.csv', 'rbU') as fileIn:
+    with open('idea_units/idea_units.csv', 'wb') as fileOut:
+
+      writerOut = csv.writer(fileOut)
+      readerIn = csv.reader(fileIn)
+
+      for row in readerIn:
+        id = row[0]
+        units = row[1].split("#")
+
+        if len(units) != 1:
+          pprint(units)
+
+        for unit in units:
+          writerOut.writerow([id, unit])
 
 
 
-
-
-#EMPTY TEXT CONDITION
-
-count = {}
-files = {}
-
-data = loadJSONs(conditions.TEXT)
-
-for session in data:
-  fileName = session['file']
-
-  encounterCode(session['code'])
-
-  if len(session['myVals']['val']) == 0:
-    pass;
-  else:
-    
-    fileName = session['file'][0:-5] + '.csv'
-    mapInc(count, fileName)
-
-    pprint(count)
-
-    if count[fileName] >= 31:
-      print "ALREADY GOT 30 FOR " + fileName;
-      continue;
-
-    csvFile = mapFile(files,'../data3/idea_units_pre/' + fileName);#CSVFile('../data3/idea_units/' + fileName, '')
-    csvFile.write(session['myVals']['val'].replace("\n", " "))
-
-
-
-
-
-
-###################
-
-
-
-
-
-#EMPTY ANNOTATION CONDITION
-countEmpty = {}
-count = {}
-
-data = loadJSONs(conditions.ANNOTATION)
-
-for session in data:
-  fileName = session['file']
-
-  encounterCode(session['code'])
-
-  if len(session['myVals']) == 0:
-    mapInc(countEmpty, fileName)
-    pprint(str(session['code']) + 
-      " is a empty session from " + fileName)
-  else:
-    mapInc(count, fileName)
-
-
-
+#loadSessions()
+splitSessions()

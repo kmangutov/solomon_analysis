@@ -1,0 +1,167 @@
+METHODOLOGY
+"how two forms of a feedback interface"
+
+"Our study examined two questions related to how input modality and history affect feedback content:"
+
+"the questions are not exhaustive but intended to give designers a better sense as to how the choice of the tool will influence feedback received onine"
+
+FFEEDBACK INTERFACES
+
+we did not pregenerate history
+
+"it grew organically"
+"we mimicked real world systems"
+
+"The presentation of the history was based on how other online platforms such as Reddit or Dribble function" "where the provider has access to the evolving history"
+
+"We adapted this format however to include a 'show more...' interaction which would allow us to log which pieces of feedback were viewed"
+
+"more condensed and allowed us to log which feedback the viewer expressed in viewing"
+
+"it was also authentic because it was feedback previous providers actually left"
+
+"the feedback is committed by pressing elsewhere on the image, and a visual marker is overlayed on the design to represent the feedback left at the location"
+
+"in the spatial condition, the feedback provider first selects a location on the design and is then prompted to enter feedback in the window that appears. once committed, a visual marker is left at the location they first selected"
+
+"the provider could leave as many pieces of feedback as desired, " "could always inspect their own feedback"
+
+"in the presence of the history, the pieces of feedback left by previous providers were shown, the provider could inspect any of the markers to read the feedback but could not edit them."
+
+"otherwise, the interface operated the same"
+
+"once satisfied with the feedback, the provider submitted their work."
+
+third paragraph: "in all conditions, when the provider was done with leaving the feedback, they submitted their work and completed a brief survey."
+
+PROCEDURE
+
+"upon accepting the task, the feedback provider was presented with a consent. if accepted, they were randomly assigned to one of 12 experimental conditions. "
+
+"after leaving the feedback in the interface provided, the provider submitted their work and was presented with a brief survey. after completing the survey, they were done with theri task"
+
+MEASURES
+
+
+STOPWORDS WERE REMOVED!!!!! somewhere
+HOW WAS SPECIFCIITY CALCULATED???? average each word etc
+
+
+"to perform content analysis, each feedback response was partitioned into individual idea units. an idea units represented a coherent unit of thought. the idea units were then coded based upon a taxonomy of critique discourse. for example, the taxonomy included categories for... judgement (definitoin, example), interpetation"
+
+"two coders with experience in HCI"
+"then categorized each idea unit according to the taxonomy"
+
+FIRST SENTENCE OF CONTENT ANALYSIS: "for content analysis we categorized the feedback content, measures its specificity, and general metrics such as it's length"
+
+"a measure of specificity was also calculated for each feedback response. idea  units played no role in this measurement"
+
+"specificity was measured using the implementation in the ... toolkit. the toolkit measures specifcity"
+
+"we measured the number of characters in each feedback response"
+
+CONTENT SIMILARITY
+
+"a providers interactions with the prior feedback were recorded" 
+
+"likewise, in the non-spatial condition, we logged each time the provider selected a 'show more' link. "
+
+"next, for each provider, we aggregated the set of prior feedback that they viewed."
+
+"for each comment that a provider left, we aggragated the set of feedback they had viewed up to that point"
+
+"we computed the similarity between the recent comment and the feedback that was seen and the feedback that was not seen."
+
+"the python NLTK toolkit was used to compute this measurement"
+
+SELF_ASSESSMENT
+
+"ofllwing the feedback test, a provider completed a self-assessment survey. The survey had 5/6 structured responses. they were asked to rate their perceived effort (5 = high), perceived usefulness of feedback (5=high)" age/gender/design experience
+
+- effort
+- usefulenss
+- design experience
+- gender
+- age
+
+ONES ON SCALE , same sentence
+
+"the survey had 3 five-point likert scale questions and two demographic questions"
+"they were also asked for their age and gender"
+
+"three questions on a five point scale: effort, usefulenss, design experience, with five the most favoreable. It also had two questions for demographics"
+
+RESULTS
+
+"we reviewed all the submissions and excluded any that were incoherent. x submissions were excluded" "our analysis removed 3 submissions leaving us with 355 feedback responses of reasonable qualtiy"
+
+
+CONTENT ANALYSIS
+
+"say somewhere in methodology htat stopwords were removed"
+
+show an example of htose that were removed
+
+"shallow/insufficient /nonexistent"
+
+TEXT INPUT PROCUDED MORE SPECIFIC
+
+"the context provided by the spatial condition reduced the need for language necessary to convey the same information in the non-spatial condition"
+
+
+
+Figure 2. This chart shows how the experimental condition affected the length of the feedback content. Analysis show providers left longer feedback in the non-spatial condition. No other effects were found.
+
+
+CONTENT SIMILARITY
+
+GENERATED FEEDBACK MOR EISIMILAR
+
+"we only looked at comments in which the provider actually inspected the history beforehand"
+
+"the majority of the feedback rpoviaders did not look history"
+
+
+
+"though history was not widely acesssed, it was more accessed in the spatial condition that in the non spatial condition. on average ap erson looked at 6.65 comments"
+
+"only including those who looked, an ANOVA showed that people in the spatial condition looked at more prior feedback that those in the non-spatial condition"
+
+"only N in the spatial reviewed the feedback. only N in the non-spatial. if we only consider those that looked, ..."
+
+
+
+LEAD CONTENT SIMILARITY WITH WHY WE THREW OUT DATA
+
+
+"for feedbacks in which the provider examiend the prior history"
+
+"revealed that the presence of history"
+
+"showed that a provider wrote feedback more similar to the content they reviewed than the content they did not"
+
+
+FEEDBACK LEFT
+FEEDBACK REVIEWED | FEEDBACK NOT REVIEWED
+
+"This suggests that providers become fixated on the feedback they reviewed "
+
+"this suggests that presence of a history introduces a fixation effect for the feedback providers. This effect is analogous to the fixation effect ... to pictoral representations and studies of design examples"
+
+
+ENDNOTE REFERENCES THING
+orchid research/software/end note license
+
+TEXT CONDITION FEDBACK SIMIARL TO IIVEWD
+
+"this may be due to the providers exploring the feedback in the spatial condition but not actually investing effort in reading the feedback, whereas in the text condition opening the feedback had to be intentional and was not as conducive to doing rapid exploration"
+
+---------------
+
+"in no history text, "
+
+"if you want more recommendations, our data shows its best to use non spatial without history"
+
+"however if you want more judgements to assess, its best to include a history into that same feedback interface"
+
+"if you are interested in having more of a dialog with feedback providers (investigation), it's better to use a 2d interface"
