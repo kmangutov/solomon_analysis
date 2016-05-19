@@ -102,25 +102,31 @@ d3.csv("d3/char-length.csv", function(error, csv) {
   
   csv.forEach(function(x) {
     console.log("::forEach " + JSON.stringify(x));
-    var v1 = parseInt(x[headers[0]]),
-      v2 = parseInt(x[headers[1]]),
-      v3 = parseInt(x[headers[2]]),
-      v4 = parseInt(x[headers[3]]);
+    var v1 = parseFloat(x[headers[0]]),
+      v2 = parseFloat(x[headers[1]]),
+      v3 = parseFloat(x[headers[2]]),
+      v4 = parseFloat(x[headers[3]]);
       // add more variables if your csv file has more columns
       
     var rowMax = Math.max(v1, Math.max(v2, Math.max(v3,v4)));
     var rowMin = Math.min(v1, Math.min(v2, Math.min(v3,v4)));
 
-    data[0][1].push(v1);
-    data[1][1].push(v2);
-    data[2][1].push(v3);
-    data[3][1].push(v4);
+    if(v1 != -1)
+      data[0][1].push(v1);
+    if(v2 != -1)
+      data[1][1].push(v2);
+    if(v3 != -1)
+      data[2][1].push(v3);
+    if(v4 != -1)
+      data[3][1].push(v4);
      // add more rows if your csv file has more columns
      
     if (rowMax > max) max = rowMax;
     if (rowMin < min) min = rowMin; 
   });
   
+  console.log(JSON.stringify(data))
+
   var chart = d3.box()
     .whiskers(iqr(1.5))
     .height(height) 

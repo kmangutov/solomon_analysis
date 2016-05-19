@@ -130,6 +130,9 @@ d3.csv("d3/specificity.csv", function(error, csv) {
     if (rowMin < min) min = rowMin; 
   });
   
+  console.log(JSON.stringify(data))
+
+  
   var chart = d3.box()
     .whiskers(iqr(1.5))
     .height(height) 

@@ -20,6 +20,8 @@ def penn_to_wn(tag):
 def tag(text):
 	return pos_tag(word_tokenize(text))
 
+def countStops(text):
+
 def calcSpecificity(text):
 	tagged = tag(text)
 

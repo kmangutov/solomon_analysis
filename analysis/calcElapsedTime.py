@@ -35,11 +35,14 @@ for session in data:
 
 ###
 
-ss = cutMapValueArrayLength(elapsed)
-ss = cutMapValueArrayOutliers(ss, 0.025)
+#ss = cutMapValueArrayLength(elapsed)
+#ss = cutMapValueArrayOutliers(ss, 0.025)
 
-ss2 = cutMapValueArrayLength(elapsedND)
-ss2 = cutMapValueArrayOutliers(ss2, 0.025)
+ss = elapsed
+ss2 = elapsedND
+
+#ss2 = cutMapValueArrayLength(elapsedND)
+#ss2 = cutMapValueArrayOutliers(ss2, 0.025)
 
 ###
 

@@ -27,6 +27,7 @@ history,text,a,4
 history,text,a,3
 history,text,a,3
 history,text,a,1
+history,text,a,1
 history,text,b,3
 history,text,b,4
 history,text,b,5
@@ -56,6 +57,7 @@ history,text,b,5
 history,text,b,3
 history,text,b,3
 history,text,b,4
+history,text,b,2
 history,text,c,4
 history,text,c,2
 history,text,c,4
@@ -85,6 +87,7 @@ history,text,c,1
 history,text,c,4
 history,text,c,4
 history,text,c,3
+history,text,c,5
 history,2d,a,3
 history,2d,a,2
 history,2d,a,3
@@ -114,6 +117,7 @@ history,2d,a,4
 history,2d,a,3
 history,2d,a,3
 history,2d,a,3
+history,2d,a,3
 history,2d,b,3
 history,2d,b,4
 history,2d,b,5
@@ -143,6 +147,7 @@ history,2d,b,4
 history,2d,b,3
 history,2d,b,3
 history,2d,b,3
+history,2d,b,5
 history,2d,c,3
 history,2d,c,1
 history,2d,c,3
@@ -172,6 +177,7 @@ history,2d,c,3
 history,2d,c,3
 history,2d,c,3
 history,2d,c,3
+history,2d,c,1
 nohistory,text,a,3
 nohistory,text,a,3
 nohistory,text,a,5
@@ -201,6 +207,7 @@ nohistory,text,a,3
 nohistory,text,a,3
 nohistory,text,a,2
 nohistory,text,a,5
+nohistory,text,a,3
 nohistory,text,b,2
 nohistory,text,b,5
 nohistory,text,b,3
@@ -230,6 +237,7 @@ nohistory,text,b,4
 nohistory,text,b,3
 nohistory,text,b,3
 nohistory,text,b,2
+nohistory,text,b,4
 nohistory,text,c,4
 nohistory,text,c,4
 nohistory,text,c,3
@@ -259,10 +267,10 @@ nohistory,text,c,3
 nohistory,text,c,3
 nohistory,text,c,4
 nohistory,text,c,4
+nohistory,text,c,2
 nohistory,2d,a,5
 nohistory,2d,a,3
 nohistory,2d,a,3
-nohistory,2d,a,4
 nohistory,2d,a,4
 nohistory,2d,a,4
 nohistory,2d,a,3
@@ -288,6 +296,7 @@ nohistory,2d,a,1
 nohistory,2d,a,2
 nohistory,2d,a,4
 nohistory,2d,a,3
+nohistory,2d,a,4
 nohistory,2d,b,4
 nohistory,2d,b,3
 nohistory,2d,b,4
@@ -317,6 +326,7 @@ nohistory,2d,b,4
 nohistory,2d,b,2
 nohistory,2d,b,3
 nohistory,2d,b,3
+nohistory,2d,b,2
 nohistory,2d,c,3
 nohistory,2d,c,4
 nohistory,2d,c,3
@@ -334,15 +344,14 @@ nohistory,2d,c,4
 nohistory,2d,c,3
 nohistory,2d,c,3
 nohistory,2d,c,3
-nohistory,2d,c,1
 nohistory,2d,c,4
 nohistory,2d,c,4
 nohistory,2d,c,2
 nohistory,2d,c,3
-nohistory,2d,c,2
 nohistory,2d,c,5
 nohistory,2d,c,1
 nohistory,2d,c,5
 nohistory,2d,c,2
 nohistory,2d,c,1
 nohistory,2d,c,5
+nohistory,2d,c,3

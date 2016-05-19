@@ -36,6 +36,10 @@ missingLabel = []
 for session in data:
   demo = lookupDemo(session['code'])
 
+  bad = [776, 1406, 1483]
+  if session['code'] in bad:
+    continue
+
   if not demo == None:
     keys = [labelDesign(session, True)]
     keysND = [labelDesign(session, False)]
@@ -53,11 +57,11 @@ for session in data:
     missingLabel.append([labelDesign(session, True)])
 
 
-effort = cutMapValueArrayLength(effort)
-effortND = cutMapValueArrayLength(effortND)
+#effort = cutMapValueArrayLength(effort)
+#effortND = cutMapValueArrayLength(effortND)
 
-usefulness = cutMapValueArrayLength(usefulness)
-usefulnessND = cutMapValueArrayLength(usefulnessND)
+#usefulness = cutMapValueArrayLength(usefulness)
+#usefulnessND = cutMapValueArrayLength(usefulnessND)
 
 
 

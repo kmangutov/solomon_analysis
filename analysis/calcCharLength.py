@@ -69,12 +69,14 @@ for session in data:
     textsNS.append(t)
 
 ###
-ss = cutMapValueArrayLength(charLength)
-ss = cutMapValueArrayOutliers(ss)
+ss = charLength
+#ss = cutMapValueArrayLength(charLength)
+#ss = cutMapValueArrayOutliers(ss)
 #ss = normalizeMap(ss)
 
-ss2 = cutMapValueArrayLength(charLengthNoDesign)
-ss2 = cutMapValueArrayOutliers(ss2)
+ss2 = charLengthNoDesign
+#ss2 = cutMapValueArrayLength(charLengthNoDesign)
+#ss2 = cutMapValueArrayOutliers(ss2)
 #ss2 = normalizeMap(ss2)
 
 pprint(ss2)

@@ -220,18 +220,18 @@ for session in data:
 pprint(mapSimilarity)
 
 ###CUT LENGHT TO SAME FOR ALL CONDITIONS
-ss = cutMapValueArrayLength(mapSimilarity)
-pprint("CUT")
-pprint(ss)
-
+#ss = cutMapValueArrayLength(mapSimilarity)
+#pprint("CUT")
+#pprint(ss)
+ss = mapSimilarity
 
 ###TAKE OUT OUTLIERS
-ss = cutMapValueArrayOutliers(ss)
-pprint("OUTLIERS")
-pprint(ss)
+#ss = cutMapValueArrayOutliers(ss)
+#pprint("OUTLIERS")
+#pprint(ss)
 
 ###NORMALIZE
-ss = normalizeMap(ss)
+#ss = normalizeMap(ss)
 #for key in ss.keys():
 #  ss[key] = normalize(ss[key], simMin, simMax)
 
@@ -248,9 +248,10 @@ exportConditions("similarity.csv", ss, keys)
 ###THREE WAY ANOVA
 
 pprint(mapSimilarityDesign)
-ss3 = cutMapValueArrayLength(mapSimilarityDesign)
-ss3 = cutMapValueArrayOutliers(ss3)
-ss3 = normalizeMap(ss3)
+#ss3 = cutMapValueArrayLength(mapSimilarityDesign)
+#ss3 = cutMapValueArrayOutliers(ss3)
+#ss3 = normalizeMap(ss3)
+ss3 = mapSimilarityDesign
 
 exportThreeWayAnova('similarity-three-way.csv', ss3, 
   ['unprimed', 'primed'],

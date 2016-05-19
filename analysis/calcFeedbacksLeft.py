@@ -12,7 +12,6 @@ from pprint import pprint
 from formatting.csvUtil import CSVFile
 import itertools
 from feedbackProcessing import *
-from specificity import average_specificity2
 
 
 
@@ -40,13 +39,16 @@ for session in data:
 
 
 ###
-ss = cutMapValueArrayLength(feedbacks)
-ss = cutMapValueArrayOutliers(ss)
+#ss = cutMapValueArrayLength(feedbacks)
+#ss = cutMapValueArrayOutliers(ss)
 #ss = normalizeMap(ss)
+ss = feedbacks
 
-ss2 = cutMapValueArrayLength(feedbacksND)
-ss2 = cutMapValueArrayOutliers(ss2)
+
+#ss2 = cutMapValueArrayLength(feedbacksND)
+#ss2 = cutMapValueArrayOutliers(ss2)
 #ss2 = normalizeMap(ss2)
+ss2 = feedbacksND
 
 
 keys = ['history-2d', 'nohistory-2d']

@@ -113,21 +113,36 @@ d3.csv("d3/feedbacks-left.csv", function(error, csv) {
     var rowMax = Math.max(v1, v2);
     var rowMin = Math.min(v1, v2);
 
-    data[0][1].push(v1);
-    data[1][1].push(v2);
+    if(v1 == -1 && v2 == -1)
+      return;
+
+    if(v1 == -1) {
+      rowMin = v2
+      rowMax = v2
+    } else if(v2 == -1) {
+      rowMin = v1
+      rowMax = v1
+    }
+
+    if(v1 != -1)
+      data[0][1].push(v1);
+    if(v2 != -1)
+      data[1][1].push(v2);
 
      // add more rows if your csv file has more columns
      
     if (rowMax > max) max = rowMax;
     if (rowMin < min) min = rowMin; 
   });
+
+  console.log("max: " + max + ", min: " + min);
   
   var chart = d3.box()
     .whiskers(iqr(1.5))
     .height(height) 
     .domain([min, max])
     .showLabels(labels)
-    .tickFormat(function(d) { return parseFloat(d).toFixed(3); });
+    .tickFormat(function(d) { return parseFloat(d).toFixed(0); });
 
 
 
