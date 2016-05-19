@@ -112,7 +112,10 @@ def loadData():
             count[sessLabel] = 0
 
         if count[sessLabel] < 30:
-            ret.append(session)
+
+            bad = [776, 1406, 1483]
+            if session['code'] not in bad:
+              ret.append(session)
             mapInc(count, sessLabel)
 
     pprint(count)

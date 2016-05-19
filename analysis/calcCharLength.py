@@ -11,7 +11,7 @@ from pprint import pprint
 from formatting.csvUtil import CSVFile
 import itertools
 from feedbackProcessing import *
-from specificity import average_specificity2
+#from specificity import average_specificity2
 
 
 
@@ -23,6 +23,9 @@ charLengthNoDesign = {}
 data = loadData()
 count = 0
 
+textsSP = []
+textsNS = []
+
 for session in data:
   count += 1
   keys = [labelDesign(session, True)]
@@ -33,13 +36,22 @@ for session in data:
 
     charSum = 0
     feedbackCount = 0
+    corpus = ""
 
     for feedback in session['myVals']:
       charSum += len(feedback['text'])
       feedbackCount += 1
+      corpus += feedback['text'] + ". "
 
     mapArrayAppendKeys(charLength, keys, charSum)
     mapArrayAppendKeys(charLengthNoDesign, keysND, charSum)
+
+    t = {}
+    t['length'] = charSum
+    t['text'] = corpus
+    t['id'] = session['code']
+    textsSP.append(t);
+
 
   ###TEXT MODALITY
   
@@ -49,6 +61,12 @@ for session in data:
     chars = len(session['myVals']['val'])
     mapArrayAppendKeys(charLength, keys, chars)
     mapArrayAppendKeys(charLengthNoDesign, keysND, chars)
+
+    t = {}
+    t['length'] = charSum
+    t['text'] = session['myVals']['val']
+    t['id'] = session['code']
+    textsNS.append(t)
 
 ###
 ss = cutMapValueArrayLength(charLength)
@@ -68,3 +86,22 @@ exportThreeWayAnova("char-length.csv", ss,
 
 print(count)
 ###
+
+
+###########
+
+print "\n\n\n"
+sort = sorted(textsSP, key= lambda k: k['length'])
+pprint("Spatial-----------")
+mid = len(sort) / 2
+#pprint(sort[-3:])
+pprint(sort[mid - 2:mid + 2])
+
+
+sort = sorted(textsNS, key= lambda k: k['length'])
+pprint("Non-spatial--------")
+mid = len(sort) / 2
+pprint(sort[mid - 2:mid + 2])
+
+
+

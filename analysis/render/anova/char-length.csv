@@ -12,7 +12,6 @@ nohistory,text,a,255
 nohistory,text,a,268
 nohistory,text,a,278
 nohistory,text,a,281
-nohistory,text,a,313
 nohistory,text,a,322
 nohistory,text,a,332
 nohistory,text,a,332
@@ -20,7 +19,6 @@ nohistory,text,a,388
 nohistory,text,a,393
 nohistory,text,a,425
 nohistory,text,a,428
-nohistory,text,a,459
 nohistory,text,a,465
 nohistory,text,a,475
 nohistory,text,a,524
@@ -29,7 +27,6 @@ nohistory,text,a,576
 nohistory,text,b,61
 nohistory,text,b,74
 nohistory,text,b,108
-nohistory,text,b,113
 nohistory,text,b,115
 nohistory,text,b,121
 nohistory,text,b,129
@@ -51,7 +48,6 @@ nohistory,text,b,370
 nohistory,text,b,374
 nohistory,text,b,394
 nohistory,text,b,514
-nohistory,text,b,520
 nohistory,text,b,565
 nohistory,text,b,717
 nohistory,text,c,42
@@ -71,20 +67,16 @@ nohistory,text,c,184
 nohistory,text,c,194
 nohistory,text,c,195
 nohistory,text,c,225
-nohistory,text,c,252
 nohistory,text,c,275
 nohistory,text,c,278
 nohistory,text,c,288
-nohistory,text,c,318
 nohistory,text,c,323
 nohistory,text,c,327
 nohistory,text,c,348
 nohistory,text,c,349
 nohistory,text,c,433
 nohistory,text,c,482
-nohistory,2d,a,35
 nohistory,2d,a,36
-nohistory,2d,a,46
 nohistory,2d,a,93
 nohistory,2d,a,117
 nohistory,2d,a,123
@@ -110,7 +102,6 @@ nohistory,2d,a,538
 nohistory,2d,a,572
 nohistory,2d,a,629
 nohistory,2d,a,659
-nohistory,2d,b,14
 nohistory,2d,b,24
 nohistory,2d,b,30
 nohistory,2d,b,52
@@ -131,15 +122,12 @@ nohistory,2d,b,257
 nohistory,2d,b,263
 nohistory,2d,b,274
 nohistory,2d,b,287
-nohistory,2d,b,295
 nohistory,2d,b,299
 nohistory,2d,b,340
 nohistory,2d,b,356
 nohistory,2d,b,396
 nohistory,2d,b,409
 nohistory,2d,b,465
-nohistory,2d,c,11
-nohistory,2d,c,17
 nohistory,2d,c,23
 nohistory,2d,c,30
 nohistory,2d,c,40
@@ -168,7 +156,6 @@ nohistory,2d,c,565
 nohistory,2d,c,576
 history,text,a,61
 history,text,a,85
-history,text,a,86
 history,text,a,87
 history,text,a,89
 history,text,a,108
@@ -178,7 +165,6 @@ history,text,a,124
 history,text,a,128
 history,text,a,128
 history,text,a,149
-history,text,a,181
 history,text,a,184
 history,text,a,191
 history,text,a,231
@@ -194,7 +180,6 @@ history,text,a,382
 history,text,a,393
 history,text,a,413
 history,text,a,423
-history,text,b,72
 history,text,b,84
 history,text,b,92
 history,text,b,94
@@ -204,7 +189,6 @@ history,text,b,119
 history,text,b,124
 history,text,b,132
 history,text,b,167
-history,text,b,183
 history,text,b,194
 history,text,b,209
 history,text,b,223
@@ -242,10 +226,8 @@ history,text,c,278
 history,text,c,284
 history,text,c,298
 history,text,c,326
-history,text,c,361
 history,text,c,437
 history,text,c,441
-history,text,c,453
 history,text,c,471
 history,text,c,485
 history,text,c,754
@@ -262,7 +244,6 @@ history,2d,a,128
 history,2d,a,132
 history,2d,a,133
 history,2d,a,163
-history,2d,a,171
 history,2d,a,184
 history,2d,a,184
 history,2d,a,186
@@ -270,7 +251,6 @@ history,2d,a,188
 history,2d,a,213
 history,2d,a,215
 history,2d,a,226
-history,2d,a,231
 history,2d,a,246
 history,2d,a,253
 history,2d,a,269
@@ -288,7 +268,6 @@ history,2d,b,96
 history,2d,b,101
 history,2d,b,104
 history,2d,b,105
-history,2d,b,113
 history,2d,b,146
 history,2d,b,147
 history,2d,b,153
@@ -296,7 +275,6 @@ history,2d,b,164
 history,2d,b,168
 history,2d,b,171
 history,2d,b,174
-history,2d,b,180
 history,2d,b,247
 history,2d,b,284
 history,2d,b,298
@@ -308,7 +286,6 @@ history,2d,b,463
 history,2d,b,506
 history,2d,c,47
 history,2d,c,49
-history,2d,c,53
 history,2d,c,57
 history,2d,c,61
 history,2d,c,80
@@ -318,7 +295,6 @@ history,2d,c,107
 history,2d,c,112
 history,2d,c,115
 history,2d,c,125
-history,2d,c,130
 history,2d,c,154
 history,2d,c,155
 history,2d,c,161

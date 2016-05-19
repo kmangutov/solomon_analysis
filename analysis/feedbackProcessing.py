@@ -129,7 +129,9 @@ def exportConditions(stat, hashmap, keys):
   for i in range(len(hashmap[keys[0]])):
     ret = ""
     for key in keys:
-      ret += str(hashmap[key][i]) + ","
+      if len(hashmap[key]) > i:
+        ret += str(hashmap[key][i]) + ","
+      else: ret += ","
     csvFile.write(ret[0:-1])
 
   csvFile.close()

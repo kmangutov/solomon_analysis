@@ -21,6 +21,7 @@ def wordnet_depth_simple(word):
   #print 'Hypernyms: ' , hypernyms
   return depth
 
+#def wordnet_depth(sentence)
 
 def wordnet_depth(word):
 
@@ -40,12 +41,22 @@ def wordnet_depth(word):
     pos_object = ADJECTIVE
   elif pos == 'RB':
     pos_object = ADVERB
+  else:
+    pos_object = None
 
-  if pos_object == None:
-    return -1
+
+  synsets = {}
+  if pos_object != None:
+    #pprint("ITS HAPPENING")
+    synsets = wordnet.synsets(string, pos_object) 
+  else:
+    print 'ITS HAPPENING~~'
+    synsets = wordnet.synsets(string)    
+
+    #return -1
 
   #print "word: " + str(string)
-  synsets = wordnet.synsets(string, pos_object)
+  #synsets = wordnet.synsets(string, pos_object)
   #print synsets
 
   if len(synsets) < 1:
@@ -71,7 +82,19 @@ def wordnet_depth(word):
   #print 'Hypernyms: ' , hypernyms
   return depth
 
-def average_specificity2(s):
+#def sentence_specificity(s):
+
+
+def countStopWords(s):
+
+  sentence = Sentence(parse(s))
+  count = 0
+  for word in sentence.words:
+    if word.string in wordlist.STOPWORDS:
+      count += 1
+  return count
+
+def calcSpecificity(s):
   sentence = Sentence(parse(s))
   sum = 0
   count = 0
@@ -80,6 +103,8 @@ def average_specificity2(s):
       continue
     depth = wordnet_depth(word)
     if depth == -1: #or depth == 0:
+      print "depth: " + str(depth) + " of word: " + word.string
+      pprint(s)
       continue
     #print word.string + ":" + str(depth)
     sum += depth
