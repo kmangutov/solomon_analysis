@@ -22,10 +22,18 @@ data = loadData()
 feedbacks = {}
 feedbacksND = {}
 
+spatialLooked = []
+allSpatial = []
+
+nonspatialLooked = []
+allNonspatial = []
+
+
+
 for session in data:
   keys = [labelDesign(session, True)]
   keysND = [labelDesign(session, False)]
-
+  code = session['code']
 
   if session['modality'] == 'text':
 
@@ -33,6 +41,9 @@ for session in data:
     for history in session['stack']:
       if float(history['duration']) > 0:
         feedbacksOpened += 1
+        if code not in nonspatialLooked:
+          nonspatialLooked.append(code)
+    allSpatial.append(code)
 
     mapArrayAppendKeys(feedbacks, keys, feedbacksOpened)
     mapArrayAppendKeys(feedbacksND, keysND, feedbacksOpened)
@@ -52,6 +63,10 @@ for session in data:
 
           if float(history['duration']) > threshold:
             feedbacksOpened.append(historyId)
+
+            if code not in spatialLooked:
+              spatialLooked.append(code)
+    allNonspatial.append(code)
 
     mapArrayAppendKeys(feedbacks, keys, len(feedbacksOpened))
     mapArrayAppendKeys(feedbacksND, keysND, len(feedbacksOpened))
@@ -74,4 +89,18 @@ keys = ['history-2d', 'history-text']
 exportConditions("feedbacks-looked.csv", ss2, keys)
 exportThreeWayAnova("feedbacks-looked.csv", ss, 
   ['history'], ['text','2d'], ['a', 'b', 'c'])
+
+print '------------'
+print 'Spatial looked: ' + str(len(spatialLooked)) + "/" + str(len(allSpatial))
+print 'non-spatial looked: ' + str(len(nonspatialLooked)) + "/" + str(len(allNonspatial))
+
+
+
+
+
+
+
+
+
+
 
