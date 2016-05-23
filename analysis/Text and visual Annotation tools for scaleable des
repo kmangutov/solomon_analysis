@@ -1,0 +1,158 @@
+Text and visual Annotation tools for scaleable design feedback generation
+
+->designer= aware of influence to choose approrpiate mechanism to get feedback that matches what they want
+->platform developers= generate interface to achieve specified goals
+
+nintefcae -> "whats your goal?" -> generate the right interface
+
+INTRODUCTION
+"designers have many different genres (category or class) of platforms to choose from"
+"there's lots of ways to organize them"
+"one way = type of interface they provide to feedback providers"
+"one class is visual interface"
+"another is more text centric open ended inteface"
+examples are...
+
+"its important for designers to understand hwo their choice influences the type of feedback they receive"
+"its also important for those who create these platforms to recognize that their platform should be more versatile and offer the right interface to generate the desired feedback"
+
+"one challenge is that there is little to no empirical evidence that could guide a designers decision or implementaitons in existing platforms"
+
+
+METHODOLOGY
+
+"in this paper, I conduct an experiment testing two popular classes of user itnerfaces for feedback data collection"
+
+"the results may also create awareness among system developers as to how their implementation choices influence the feedback exchange"
+
+PARTICIPANTS
+"based on pilot data, the payment was set at $0.50 per task to reflect current US minimum wage"
+
+FEEDBACK INTERFACES
+"a submit button was placed next to the text area to complete the task"
+
+PROCEDURE
+"the experimental conditions were implemented in javascript and the feedback provider did not have to leave the mechanical turk platform"
+"in the condition, they read the task instructions, viewed the deisgn, and entered feedback based on the interface condition assigned"
+
+MEASURES
+"The study consisted of three sets of measures: content analysys, behavioral measure, and self assesement"
+
+BEHAVIORAL MESAURES
+"we computed the distances between the recent comment and history feedback using the cosine similarity metric as implemented in the python NLTK toolkit"
+
+"the survey had 3 questions on a five point scale"
+"participants answered 3 questions on a five point likert scale"
+
+"FOllowing the feedback teask a provider complete d as elf assesment survey. Providers rated their design expertise, perceived effort, and perceived usefulness of the feedback given on a five-point Likert-scale (1 = least favoreable, 5 = most favoreable)"
+
+RESULTS
+"an anova did not detect a main effect of Interface or History on feedback specificity."
+
+"we only considered instances where the provider had examined the history."
+
+--------"when history was presented in the Spatial condition, we found X (or per person). when history was done in the non-spatil, we found ppl accessed it Y"    (total number of people accessed)
+
+
+GNENERATED FEEDBACK SIMILAR
+"An anova showed that condition A (mean = ) was greater than condition b (mean = ); (F-value, p value)"=
+"A main effect was detected "
+"an anova showed that condition A (mean) greater than condition b (mean, P, f)"
+
+"when useres inspected the feedback (mean=0.1) the feedback was more similar "
+
+
+no generating and inpsecting in same sentence
+
+"value represents relationship"
+"when u generated feedback after inspecting the history, the feedback was more similar (mean) to the history that you looked at than it was to the history that you did not look at (mean, P, f)"  <--
+
+"how pictoral representations of examples introduce a fixation effect when solving design problems" [John Gero]
+
+Non-spatial feedback more similar to viewed history
+"the non-permance of the visibility of the feedback"
+
+
+
+
+
+"this effect may have been due to the non-permanance of the feedback window in the spatial Interface. this interface required the feedback provider to hover over a marker to reveal the content. This was in contrast to the non-spatial interface"
+
+SELF ASSESEMTN
+
+"distribution of effort ratings across conditions. anova did not detect differnces between these conditions"
+
+
+DISCUSSION
+
+P1:
+"main goal of this experiment was to help designers understand how theri choicce of feedback tool would influence the feedback received" "and system implementers"
+
+"Our results showed that ..." 
+"if you choose one interface, x happens"
+"if you choose anotehr, y happens"
+
+P2:
+"since we did not have access to designers of these designers, it was not possible to measure the quality of the desiginer"
+"what we did not di is measure the quality from the perspective of an expert"
+
+DISCUSSION:
+other aspects of the design process (stage of design process)
+"have anyone else found differences in crowdfeedback at different stages of design?"
+"otoher work has considered different stages of the design. Our studies did nto consider different stages and hwo they would interact w design tool"
+"Due to the number of factors we already had it was not feasible to include an additional factor of stage in this study"
+"Future work may consider this as other studies have found that stage .... "
+
+
+LIMITATIONS:
+"to perform a more copmlete assessement in the difrences of feedback, future work should include an objective measure of the quaity of the feedback"
+"if history is included, ..."
+given scale of feedback
+
+DEISCUSSION and FUTURE WORK
+limitations
+
+CONCLUSION
+
+
+
+
+DISCUSSION
+"your study did not consider different levels of expertise of the feedback provider."
+"in addition to stage, we als odid nto consider the expertise of the feedback provider
+"
+"and how experts may prefer or not these different interface conditions"
+"for instance, an expert may find it less necessary to access the history of feedback when geenrating their own insights"
+"whereas novices may value this more"
+
+
+"our conditions "
+"there are interfaces that are inbetween the interfaces "
+"that do not neatly fall into the categories of either condition we studied"
+"for instance, in both Voyant CrowdCrit, one could enter hteir textb in teh textbox, and annotat e the region of the design associated with that comment. Future work is necessary to understand how those hybrid interfaces compare to the two conditions taht we studied"
+
+
+------------------
+
+
+RELATED WORK
+single section
+
+"many different categories of feedback selection tools for collecting design feedback in an online context"
+classify/categoirze the tools
++ email (no history)
+
+look at different tools and look at different studies of crowd feedback systems
+FEEDBACK COLLECTION TOOLS
+
+STUDIES OF CROWDFEEDBACK SYSTEMS
+a number of studies have been conducted studying the benefit of crowd feedback in the design process. anbang and brian studied how it infuluences classroom design products and showed someting
+
+gerbers had critiki and it did something
+
+p dow ahd something ait id dsomething
+
+but what none of these studied did is compare a spatial to a non spatial interface.
+
+in none of these interfaces did 
+
