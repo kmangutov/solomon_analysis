@@ -1,0 +1,207 @@
+RELATED WORK PART @
+FEEDBACK COLLECTION TOOLS
+
+"There are at least four classes of tools for conducting reviews of other peoples work"
+
+"for collecting design feedback and conducting peer review"
+
+--
+
+"With the non-spatial tool, feedback providers can see an image of the design and can enter their feedback into a tex box"
+"Many online communities such as Reddit and Dribble"
+
+say what they do do, nto don't do
+
+"Reddit and Dribble implement this class of tool"
+
+----
+
+"These tools may encourage feedback provider to generate longer feedback and more conceptual feedback"
+"because they dont have to attach their comment to a spceific element in the design"
+
+---- 
+
+move our study to the end. (after introducing the 4 classes or whatever)
+
+"A third class of tool for the more general class of peer review tool uses auditory input" or multi-modal
+
+design critique instance of peer feedback
+
+----
+talk about spatial, non spatial
+"In the area of peer feedback, there are also different classes of tools"
+
+design-> spatial, non spatial, imagery,
+"then, for the more general class of peer review tools, research has also explored the use of audio overlay/input/feedback"
+----
+
+"Our work targetted two classes that are widely utilized for giving design feedback in an online context. In addition, we also studied these two classes of tools with the presence of history"
+
+-----
+STUDIES OF CROWD FEEDBACK
+
+"""focus on exploring"""
+"most of these systems focus on effective user interfaces for reviewing the feedback from the designers perspective"
+
+"in voyant, the authors explored a bidirectional interaction technique which linked overviews of feedback content and annotations on the design"
+"CrowdCrit explored showing the distribution of responses from the feedback providers in order to reveal the highest priority issues."
+
+
+
+"our work differs by focusing on the interface for the feedback provider"
+"we study two classes of inter"
+
+"our work differs by comparing two classes of user interfaces for the feedback provider"
+
+
+------------------------ DISCUSSION
+
+"introduces a fixation effect"
+"this effect causes providers to generate feedback that is more similar to the feedback they reviewed"
+
+"while we did not detect differences between conditions for the specificity of the feedback, we found that participants in the non-spatial interface left longer feedback and that had more stop words"
+
+"spatial Interface results in more investigation feedback"
+
+NO WISHY WASHY WORDS
+
+"generates X more investigation feedback. this category of feedback may be particularly beneficial in the early stage of the design"
+"this category of feedback may be particularly useful at the early stages of design"
+
+
+
+for duscssion, focus on your data
+talk about additional findings, or simple say "our results did not detect differences for our emasures, such as task completion time, self assesment, word count, etc"
+
+its ok to conclude that 
+"designers could choose either design tool and the difference could be inconsequential for the feedback they receive"
+
+
+---
+"our results also show that participants in the non-spatial interface left longer feedback and mroe stop words"
+
+"participants in the non-spatial left longer whereas participants in the spatial condition left more investigation feedback"
+---
+"these are the only two differences that would affect one's decision to use one interface over another"
+"we found thsi diff for non spatial"
+"we found thsi diff for spatial"
+"we did not find differences for these other measures"
+"therefore, our conclusion is that for only attributes that matter for your choice of feedback interface is wanting more investigation feedback and if you want longer feedback."
+
+history: "The reason this result is interesting is designers can have more confidence that their choice of interface for providers will have little consequence for the feedback they collect."
+
+first talk about classes of interface. "however, we did find an effect of history. maybe the more important is not the class of the tool, but whether you choose to include the history"
+
+---
+
+"the number of factors we included in our experiment... it was not feasible to include an extra in our study..." good
+
+DONT USE 'LOOOK AT'
+
+"two classes of feedback interface with features that were exclusive of each other. however, there are feedback interfaces that do not fit neatly into either of these conditions. "
+
+--
+"future work is needed to explore how expertise interacts with the choice of feedback collection interface"
+
+
+LIMITATIONS
+
+"Future work should consider recruitign experts to evaluate the quality of the feedback" delete should have sentence
+
+CONC
+"we showed that access to feedback history across both classes of interfaces studied introduced a fixation effect. This could lead to less divergent comments. "
+"Second, we found that non-spatial interface led to XX% longer feedback." if X > 5
+
+"contributes to helping designers be aware of how the choice of collection interface could influence the feedback the received"
+
+either word conclusion to sound loftier, "but the interface had no effect for other categories"
+
+elaborate mroe on 1st, 2nd, 3rd
+
+or 
+"main contribution of this work is reporting how history and interface influence the feedback. we found that " LEAVE IET THE WAY IT IS, ELABORATE MORE, make contribution sound more
+
+
+"fixation can therefore lead to mroe convergent feedback or feedback that has lower diversity. diversity is one of the reasons ppl wanna use online tools in the first place"
+
+------------------
+
+INSERT DEMOGRAPHIC DATA HERE
+
+----
+INTRODUCTION
+"Generated insights help designers iterate towards solutions that better connect with the target audience"
+
+"Designers have mayn different classes "     class of tool/platform/etc CLEAN THEM UP ENTIRE PAPER
+
+"These interfaces can be classified as spatial or text-based non-spatial. \n A Spatial interface "    more compression
+
+"A spatial interface is one where the feedback provider must first visually mark a location on the design before entering feedback"
+
+"One class of these tools is ...."
+
+"Another class of these tools uses text-centric"
+
+
+
+---------
+
+"Our work will compare these two classes of feedback interface. This is an important comparison because prior work has shown that even small diferences in interface can "
+
+"other than class, researchers have studied other aspects of inteface such as scaffolding. "
+
+
+
+"Other than class of interface, another consideration is whether the tool reveals history feedback and how it "
+
+
+say gonna compare -> say comparison important bc small difference matter -> pros/cons
+another consideration is whether reveal history -> advantage of history -> disadvantage of history "however fixation effects have only been studied in context of design examples" -> "our work will study the possiblity of this effect for writing design feedback"
+
+
+ "little empirical evidence that could guide a designer's decision"
+
+"For instance, different classes of the interface may lead to different categories of content."
+
+
+---
+"we also manipulate the rpesence of history for each of the two classes of interfaces"
+
+"we recruited participants (N=360) to provide feedback on three categories of designs across all conditions"
+
+"participants reviewed the design, left feedback on the design in the assigned condition, "
+
+"we measured .. .. . ."
+
+----
+
+"each category of design received feedback in all four conditions"
+
+---
+
+"recruited to provide feedback on three categories of designs across conditions." <--
+
+"participats reviewed the goals and design image. they then left feedback in the assigned condition. if present, had the opportunity to review the history. after entering the feedback, they completed a survey asking (about something)."
+"For the feedback, we measured length, similarity between feedback written and feedback reviewed, ..."
+"Our main findings were that presence of history introduces a fixation effect. Feedback generated the non-spatial was longer and had more stop words. We also find that the class of interface produces different categories of feedback. For example, the blah blah blah left more investigations than other one."
+"our results show that the decision to use a spatial and non spatial interface would be tied to whether you wanted longer feedback or if you wanted feedback that is specific to a specific category of feedback"
+
+"The more important decision is whether one would choose to include history in either of these interfaces as our esults show it introduces a fixation effect" 
+
+"this could lead to less diverse content, yet diversity of perspective is one of the reasons designers would choose to use an online feedback tool"
+
+"we believe our results will contribute to helping designers know how the choice of tool influences the feedback received"
+
+
+
+
+
+
+
+
+
+
+
+
+
+

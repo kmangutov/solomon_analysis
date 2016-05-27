@@ -1,0 +1,133 @@
+RELATED WORK
+
+"There are many different classes of tools for collecting design feedback in an online context.""
+
+"There are at least 2 classes of tools for collecitn design feedback. One class are visual annotaiton tools. examples can be seen in tools such as redpen io and acrobat. In these tools a feedback provider mstu frist eselct a region of the design before they are able to enter feedback"
+
+-> more thorough strengths and weaknesses
+
+"by requiring a provider to point to a region of the design..."
+"pointing to the region of th edesign may cause them to only interpret surface level features"
+"could also have an impact on how much hthe person writes"
+
+'see design while you type'
+
+
+
+USER INTERFACES FOR CROWD FEEDBACK PLATFORMS
+
+
+2 entry points:
+-provider in
+
+"many different wayts to do feedback collection for providers. there is spatial, non-spatial text, auditory "
+->>> auditory = "email from brian"
+->>> responding with images
+
+4 classes: 
+-sptatial
+-non-spatial text
+-audio overlays (email from brian) -> emotional tone (positive=Added channel of information, downside= privacy issues, difficulty for non native speaker/ESL)
+-imagery (email from brian) -> argue you can respond with images -> "images allow u to better convey emotions"
+
+"sharing feedback using imagery" advantage = emotion, things difficult w words. downside: hard to find images that captures what u want to say, difficult for other person to interpret
+
+"we compared the two most commonly used approaches for design feedback: spatial and non spatial classes of feedback collection tools"
+"in addition, the user interface is important for the user recipient, and how they navigate and learn from the feedback. though this is an important issue, this was not a focus of our study"
+
+STRENGTHS OF WEAKNESSES
+-------------------------------------------
+
+STUDIES OF CROWD FEEDBACK SYSTEMS
+
+design consumer
+_______________
+"most of these systems focus on the interface for the designer. " 
+"for instance, in Voyant, they used bi-directional interaction to link overviews of feedback content and annotations overlaid on the design"
+-> "word cloud, and annotations that go with word cloud"
+"an overview of the reactions given by feedback provider, and annotations on the design"      reactions=numeric ratings, word in word cloud
+
+CrowdCrit showed you how many people said the same thing. distribution of the responses from the providers in order to extract out the highest priority issues for the designer who is getting the feedback.
+"the interface also considers the skill level of the provider"
+
+focus on how does the person explore the feedback
+
+feedback proivedr
+_________________
+
+main focuses have been on rubrics (what questions u ask the person) "asking right quesitons to generate feedback u want"
+
+"in other domains such as peer feedback" 
+
+"and framing features" (email from brian). what happens if i put on a numeric scale vs open ended feedback? -> look at how framing of feedback request influences content
+
+I can argue that "we are adding to this thread of research by comparing two additional ways of collecting feedback, spatial and non-spatial interface"
+
+
+------------------
+"in addition, we also studied the presence or absence of history whihc would be beneficial to not only crowd feedback but also to peer review" 
+
+DISCUSSION:
+first 3-5 sentence of findings
+
+next paragraph: our work did not control for design process.
+
+CAN WE GENERALIZE THE FINDINGS TO DIFFERENT STAGES OF DESIGN PROCESS? help designers understand how their choice of feedback collection interface may depend on the stage of the design process ->>> "bill buxton tohidi-> getting the design right and the right design" and how it generates different feedback
+
+"prototyping w tiny fingers 1994" -> need for feedback at different stages of the design process
+
+
+->>
+"the conditions in our study represented two classes of feedback interface without overlap, whereas there are interfaces that do not match either condition that we studied. for example, in the voyant and crowdcrit systems, in addition to offering a free-form response and a text box, the provider could also annotate a region of the design to associate with that comment. "
+
+MORE OF THAT. ELABORATE MY THINKING ON EACH OF THESE ISSUES. GIVE ME A SUMMARY OF WHAT WE FOUND (EFFECTS OF INTERFACE AND HISTORY)
+
+LIMITATIONS: better ways of doing it but we didn't do it. 
+"our study compared different features of the feedback generated for two classes of interfaces. However, our study did not measure the quality of the feedback itself. "
+"owever what we should have done is hire experts to measure the quality of the feedback "
+"future work could address this limitation by having independent experts rate the perceived quality of the feedback between conditions"
+
+A second limitation is that we recruited feedback providers from the mechanical turk platform. the primary incentive for participant in the study would be financial gain. Future work could test the generalizeability of these findings by using crowds driven by different incentives. such as classroom peers, people recruited from your owon social network, or in the context of online commmunities such as reddit
+
+CONCLUSION
+Designers are increasingly turning to the use of online tools to collect feedback on their in progress work. 
+
+Designers have many tools to choose from for collecting feedback for their work online. 
+The desigin choices within the tool could have consequences for the scope and quality of the feedback generated.
+
+But how does the choice of the tool influence the scope and the quality of the feedback that is received?
+
+WHAT ARE THOSE DIFFERENCES? WHICH DIRECTION? conclusion -> welcome to restate parts of discussion
+the discussion can be more detailed. 
+
+sort of there -> find a role model paper
+
+.
+heres the problem. our work made n contributions. first, our work showed that... RESULTS. (did you discover anything?). 
+
+the contribution of this work is showing something
+
+we hope this work contributs to buildign more extensive interfaces for feedback exchange, can help feedback providers better communicate their evaluation of their design, and help designers improve their work trhough higher quality feedbacks
+
+
+
+
+DIFFERENT CONDITIONS PRODUCE DIFFERENT 
+"visually scan the design the elements in the design before performing feedback entry"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
